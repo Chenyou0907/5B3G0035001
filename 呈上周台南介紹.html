@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>台南景點介紹</title>
+    <style>
+        * { box-sizing: border-box; }
+        body { font-family: Arial, sans-serif; margin: 0; padding: 20px; background-color: #f9f9f9; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 20px; background-color: #fff; border-radius: 10px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); }
+        .section { border: 2px solid #ddd; padding: 20px; margin-bottom: 20px; border-radius: 10px; overflow: hidden; text-align: center; }
+        .section h2 { margin-top: 0; font-size: 28px; }
+        
+        /* 修改圖片樣式 - 左側圖片 */
+        .image-left { 
+            float: left;
+            margin-right: 20px;
+            margin-bottom: 15px; 
+            border-radius: 10px; 
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1); 
+            max-width: 40%; /* 缩小图片尺寸，给文字留更多空间 */
+            padding: 5px; /* 添加内边距，使边框与图片有一定距离 */
+            background-color: white; /* 添加白色背景使内边距可见 */
+        }
+        
+        /* 添加右側圖片樣式 */
+        .image-right {
+            float: right;
+            margin-left: 20px;
+            margin-bottom: 15px;
+            border-radius: 10px; 
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1); 
+            max-width: 40%;
+            padding: 5px;
+            background-color: white;
+        }
+        
+        /* 右侧图片对应的文字容器样式调整 */
+        .text-right {
+            text-align: right;
+        }
+        
+        h1 { text-align: center; font-size: 36px; } /* 增加主標題字體大小 */
+        p { 
+            text-align: left; /* 改为左对齐 */
+            font-size: 18px;
+            line-height: 1.6;
+            padding-top: 10px; /* 添加顶部内边距 */
+        }
+        
+        /* 导航条样式 */
+        .nav-menu {
+            background-color: #4a6ea9;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .nav-menu a {
+            color: white;
+            text-decoration: none;
+            padding: 8px 15px;
+            margin: 0 5px;
+            border-radius: 5px;
+            background-color: #365486;
+            display: inline-block;
+            transition: background-color 0.3s;
+            font-size: 16px; /* 增加導航菜單字體大小 */
+        }
+        
+        .nav-menu a:hover {
+            background-color: #213555;
+        }
+        
+        /* 返回顶部按钮 */
+        .back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #4a6ea9;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 40px;
+            text-decoration: none;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            font-size: 18px; /* 增加返回頂部按鈕字體大小 */
+        }
+        
+        /* 添加适用于文字容器的样式 */
+        .text-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            min-height: 200px; /* 确保有足够高度进行垂直居中 */
+        }
+        
+        /* 添加以下CSS样式使图片位于文字左侧 */
+        img {
+            float: left;
+            margin-right: 15px;
+            margin-bottom: 10px;
+        }
+        
+        /* 清除浮动，防止布局问题 */
+        .clearfix::after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+        
+        /* 四草綠色隧道的特殊邊框 */
+        .border-green {
+            border: 4px solid #2E8B57; /* 绿色实线边框 */
+            border-radius: 15px; /* 较大的圆角 */
+        }
+        
+        /* 井仔腳瓦盤鹽田的特殊邊框 */
+        .border-gold {
+            border: 4px solid #DAA520; /* 金色实线边框 */
+            border-radius: 0; /* 直角边框 */
+        }
+        
+        /* 赤崁樓的特殊邊框 */
+        .border-red {
+            border: 6px double #B22222; /* 红色双线边框 */
+            border-radius: 5px; /* 小圆角 */
+        }
+        
+        /* 台南孔廟的特殊邊框 */
+        .border-blue {
+            border: 4px dashed #4169E1; /* 蓝色虚线边框 */
+            border-radius: 50%; /* 圆形边框效果 */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>台南景點介紹</h1>
+        
+        <!-- 导航菜单 -->
+        <div class="nav-menu">
+            <a href="#four-grass">四草綠色隧道</a> 
+            <a href="#jingzai">井仔腳瓦盤鹽田</a>
+            <a href="#chikan">赤崁樓</a>
+            <a href="#confucius">台南孔廟</a>
+        </div>
+
+        <div id="four-grass" class="section">
+            <h2>四草綠色隧道</h2>
+            <div class="clearfix">
+                <img src="四草綠色隧道.jpg" alt="四草綠色隧道" class="image-left border-green">
+                <div class="text-container">
+                    <p>四草綠色隧道的航行路線分成兩條：紅樹林隧道及四草台江之旅，在上竹筏之前，每位乘客都需要穿上救生衣，再領取遮陽和保護頭部的斗笠，準備妥當後就可以登上竹筏，開啟這場綠色隧道探險啦！隧道兩旁不時有鷺鷥、夜鷺或其他鳥類低空飛過，四草大眾廟紅樹林保護區林相優美，擁有五梨跤、水筆仔、欖李、海茄苳四種紅樹林。船上的解說員也會沿途細說當地生態，遊客也亦可透過望遠鏡觀察紅樹林下的招潮蟹、彈塗魚等生物，是生態旅遊的最佳場域，亦是攝影師最愛捕捉的自然美景。</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="jingzai" class="section">
+            <h2>井仔腳瓦盤鹽田</h2>
+            <div class="clearfix">
+                <img src="井仔腳瓦盤鹽田.jpg" alt="井仔腳瓦盤鹽田" class="image-right border-gold">
+                <div class="text-container">
+                    <p>井仔腳瓦盤鹽田是北門的第一座鹽田，也是現存最古老的瓦盤鹽田遺址，原為清領時期的瀨東鹽場，西元1818年遷移此至，至今未再移位，是台灣最古老的現址鹽田，至今已有200年歷史。</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="chikan" class="section">
+            <h2>赤崁樓</h2>
+            <div class="clearfix">
+                <img src="赤崁樓.jpg" alt="赤崁樓" class="image-left border-red">
+                <div class="text-container">
+                    <p>赤崁樓可說是台南中西區內最主要的古蹟建築，與安平的安平古堡是台南的兩大明星，1652年荷蘭人在此建立普羅民遮城，至此奠定了台南行政商業中心的位置，歷經300多年來幾經整修改建，始有現今的樣貌，內有海神廟、文昌閣及蓬壺書院，外圍草皮上立著國姓爺受降的雕像，總是讓國內外遊客仔細端詳，遙想著當年國姓爺的英姿煥發，最吸引目光的莫過於移自大南門城邊的9塊御碑，由狀似石龜的贔屭所乘載，傳說贔屭為九龍生子之一，生性喜歡負重，也因為贔屭而讓赤崁樓增添不少傳說故事，至今仍讓人津津樂道。</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="confucius" class="section">
+            <h2>台南孔廟</h2>
+            <div class="clearfix">
+                <img src="台南孔廟.jpg" alt="台南孔廟" class="image-right border-blue">
+                <div class="text-container">
+                    <p>「天不生仲尼，萬古如長夜。」至今臺南孔廟是全臺唯一堅持春、秋兩度在清晨五點開始，曙光乍現時結束祭典的孔廟。也是唯一堅持清制祭典的孔廟。更是舉世唯一完整收藏八方清國皇帝御匾的孔廟。 曾是第一，現在是唯一。</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <a href="#" class="back-to-top">↑</a>
+</body>
+</html>
