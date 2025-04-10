@@ -1,0 +1,47 @@
+
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>高斯模糊效果</title>
+    <style>
+        .blur-container {
+            display: flex;
+            justify-content: space-around;
+            padding: 20px;
+        }
+        
+        .blur-item {
+            width: 200px;
+            height: 200px;
+            background-color: #ff6b6b;
+            margin: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 20px;
+        }
+
+        .blur-1 {
+            filter: blur(1px);
+        }
+
+        .blur-2 {
+            filter: blur(5px);
+        }
+
+        .blur-3 {
+            filter: blur(10px);
+        }
+    </style>
+</head>
+<body>
+    <div class="blur-container">
+        <div class="blur-item blur-1">模糊1px</div>
+        <div class="blur-item blur-2">模糊5px</div>
+        <div class="blur-item blur-3">模糊10px</div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>圓餅圖</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        * {
+            /* 重置所有元素的外邊距 */
+            margin: 0;
+            /* 重置所有元素的內邊距 */
+            padding: 0;
+            /* 設置盒模型為border-box，使元素的寬度包含padding和border */
+            box-sizing: border-box;
+        }
+        
+        body {
+            /* 設置字體 */
+            font-family: Arial, sans-serif;
+            /* 設置漸層背景色 */
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            /* 確保最小高度為視窗高度 */
+            min-height: 100vh;
+            /* 使用flex布局使內容居中 */
+            display: flex;
+            /* 水平居中 */
+            justify-content: center;
+            /* 垂直居中 */
+            align-items: center;
+            /* 設置內邊距 */
+            padding: 20px;
+        }
+        
+        .container {
+            /* 設置容器背景色為半透明白色 */
+            background-color: rgba(255, 255, 255, 0.9);
+            /* 設置內邊距為30像素 */
+            padding: 30px;
+            /* 設置圓角邊框半徑為15像素 */
+            border-radius: 15px;
+            /* 添加陰影效果 */
+            box-shadow: 0 0 20px rgba(0,0,0,0.2);
+            /* 設置容器寬度為100% */
+            width: 100%;
+            /* 設置最大寬度為800像素 */
+            max-width: 800px;
+        }
+
+        h1 {
+            /* 設置標題文字水平居中對齊 */
+            text-align: center;
+            /* 設置標題文字顏色為深灰色 */
+            color: #333;
+            /* 設置標題下方外邊距為30像素 */
+            margin-bottom: 30px;
+        }
+        
+        .chart-container {
+            /* 設置相對定位，作為子元素的定位參考 */
+            position: relative;
+            /* 設置容器高度為400像素 */
+            height: 400px;
+            /* 設置容器寬度為父元素的100% */
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <!-- 主容器 -->
+    <div class="container">
+        <!-- 標題 -->
+        <h1>圓餅圖</h1>
+        <!-- 圖表容器 -->
+        <div class="chart-container">
+            <!-- Canvas元素用於繪製圖表 -->
+            <canvas id="myPieChart"></canvas>
+        </div>
+    </div>
+
+    <script>
+        // 獲取Canvas上下文
+        const ctx = document.getElementById('myPieChart').getContext('2d');
+        
+        // 定義圖表數據
+        const data = {
+            // 標籤名稱
+            labels: ['green', 'red', 'yellow', 'blue'],
+            // 數據集配置
+            datasets: [{
+                // 各部分的數值
+                data: [25, 25, 25, 25],
+                // 各部分的背景顏色
+                backgroundColor: [
+                    'green',
+                    'red',
+                    'yellow',
+                    'blue'
+                ],
+                // 邊框顏色
+                borderColor: '#fff',
+                // 邊框寬度
+                borderWidth: 2
+            }]
+        };
+
+        // 圖表配置
+        const config = {
+            // 圖表類型為圓餅圖
+            type: 'pie',
+            // 使用上面定義的數據
+            data: data,
+            // 圖表選項
+            options: {
+                // 響應式設計
+                responsive: true,
+                // 不保持寬高比
+                maintainAspectRatio: false,
+                // 插件配置
+                plugins: {
+                    // 圖例配置
+                    legend: {
+                        // 圖例位置在右側
+                        position: 'right',
+                        labels: {
+                            font: {
+                                // 字體大小
+                                size: 14
+                            },
+                            // 內邊距
+                            padding: 20
+                        }
+                    },
+                    // 提示框配置
+                    tooltip: {
+                        callbacks: {
+                            // 自定義提示框標籤
+                            label: function(context) {
+                                // 獲取標籤名稱
+                                const label = context.label || '';
+                                // 獲取數值
+                                const value = context.raw || 0;
+                                // 計算總和
+                                const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                                // 計算百分比
+                                const percentage = Math.round((value / total) * 100);
+                                // 返回格式化後的標籤
+                                return `${label}: ${value}%`;
+                            }
+                        }
+                    }
+                }
+            }
+        };
+
+        // 創建新的圖表實例
+        new Chart(ctx, config);
+    </script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>亮度調整效果</title>
+    <style>
+        .brightness-container {
+            display: flex;
+            justify-content: space-around;
+            padding: 20px;
+        }
+        
+        .brightness-item {
+            width: 200px;
+            height: 200px;
+            background-color: #ff6b6b;
+            margin: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 20px;
+        }
+
+        .brightness-1 {
+            filter: brightness(0.5);
+        }
+
+        .brightness-2 {
+            filter: brightness(1);
+        }
+
+        .brightness-3 {
+            filter: brightness(1.5);
+        }
+    </style>
+</head>
+<body>
+    <div class="brightness-container">
+        <div class="brightness-item brightness-1">亮度50%</div>
+        <div class="brightness-item brightness-2">亮度100%</div>
+        <div class="brightness-item brightness-3">亮度150%</div>
+    </div>
+</body>
+</html>

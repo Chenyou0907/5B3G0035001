@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>圓餅圖</title>
+        <style>
+        #grad{
+            width: 300px; /* 設定圓餅圖的寬度為300像素 */
+            height: 300px; /* 設定圓餅圖的高度為300像素 */
+            margin: 0 auto; /* 將圓餅圖水平置中 */
+            display: block; /* 將元素顯示為區塊元素 */
+            background-image: conic-gradient(red 0deg,red 90deg,yellow 90deg,yellow 180deg,green 180deg,green 270deg,blue 270deg,blue 360deg); /* 使用錐形漸層創建圓餅圖，從0度開始，每90度變換一次顏色 */
+            border-radius: 50%; /* 將元素變成圓形 */
+        }
+    </style>
+</head>
+<body>
+    <div id="grad"></div>
+</body>
+</html>
