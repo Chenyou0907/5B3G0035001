@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flex Item 對齊方式</title>
+    <style>
+        /* Flex容器設置 */
+        .container {
+            display: flex; /* 設置為flex容器 */
+            height: 150px; /* 設置容器高度 */
+            background-color: #f0f0f0; /* 背景色 */
+            margin-bottom: 20px; /* 底部間距 */
+            padding: 10px; /* 內部間距 */
+        }
+
+        /* 基本項目樣式 */
+        .item {
+            width: 40px; /* 項目寬度 */
+            padding: 20px; /* 內部間距 */
+            margin: 5px; /* 外部間距 */
+            background-color: #00ffff; /* 項目背景色 */
+            text-align: center; /* 文字置中 */
+        }
+
+        /* 拉伸對齊：項目會填滿容器的交叉軸高度 */
+        .stretch {
+            align-self: stretch;
+            padding:10px 20px;
+        }
+
+        /* 頂部對齊：項目對齊容器的上邊緣 */
+        .flex-start {
+            align-self: flex-start;
+            padding: 10px 20px;
+        }
+
+        /* 底部對齊：項目對齊容器的下邊緣 */
+        .flex-end {
+            align-self: flex-end;
+            padding: 10px 20px;
+        }
+
+        /* 垂直居中對齊：項目在容器中垂直置中 */
+        .center {
+            align-self: center;
+            padding: 10px 20px;
+        }
+
+        /* 基線對齊：項目根據文字基線對齊 */
+        .baseline {
+            align-self: baseline;
+            padding: 10px 20px;
+        }
+    </style>
+</head>
+<body>
+    <h2>個別 Flex Item 的對齊方式</h2>
+    
+    <!-- Flex容器和項目展示 -->
+    <div class="container">
+        <div class="item stretch">項目1</div>
+        <div class="item flex-start">項目2</div>
+        <div class="item flex-end">項目3</div>
+        <div class="item center">項目4</div>
+        <div class="item baseline">項目5</div>
+    </div>
+</body>
+</html>

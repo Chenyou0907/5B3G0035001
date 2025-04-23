@@ -9,6 +9,9 @@
     <link rel="icon" href="頭貼.png" type="image/x-icon">
 </head>
 <body>
+    <!-- 主題切換按鈕 -->
+    <button class="theme-toggle" id="themeToggle">切換主題</button>
+    
     <!-- 左側區域 -->
     <div class="left-section">
         <!-- 左上方區域 - 頭像和名字 -->
@@ -29,6 +32,13 @@
             <div class="menu-item" data-week="week9">第九週</div>
             <div class="menu-item" data-week="week10">第十週</div>
             <div class="menu-item" data-week="week11">第十一週</div>
+            <div class="menu-item" data-week="week12">第十二週</div>
+            <div class="menu-item" data-week="week13">第十三週</div>
+            <div class="menu-item" data-week="week14">第十四週</div>
+            <div class="menu-item" data-week="week15">第十五週</div>
+            <div class="menu-item" data-week="week16">第十六週</div>
+            <div class="menu-item" data-week="week17">第十七週</div>
+            <div class="menu-item" data-week="week18">第十八週</div>
         </div>
     </div>
     
@@ -233,6 +243,53 @@
                     <a href="week8 2.0/filter3.html" class="work-link" target="_blank">查看作品</a>
                 </div>
             </div>
+
+            <div class="work-content" id="week9">
+                <h2>第九週考試</h2>
+                <div class="work-item">
+                    <h3>考試</h3>
+                    <p>網頁設計</p>
+                    <a href="week9 test/index.html" class="work-link" target="_blank">查看作品</a>
+                </div>
+            </div>
+
+            <div class="work-content" id="week10">
+                <h2>第十週作品</h2>
+                <div class="work-item">
+                    <h3>作品 10-1</h3>
+                    <p>flex練習1</p>
+                    <a href="week10/flex1.html" class="work-link" target="_blank">查看作品</a>
+                </div>
+                <div class="work-item">
+                    <h3>作品 10-2</h3>
+                    <p>flex練習2</p>
+                    <a href="week10/flex2.html" class="work-link" target="_blank">查看作品</a>
+                </div>
+                <div class="work-item">
+                    <h3>作品 10-3</h3>
+                    <p>flex練習3</p>
+                    <a href="week10/flex3.html" class="work-link" target="_blank">查看作品</a>
+                </div>
+                <div class="work-item">
+                    <h3>作品 10-4</h3>
+                    <p>flex練習4</p>
+                    <a href="week10/flex4.html" class="work-link" target="_blank">查看作品</a>
+                </div>
+                <div class="work-item">
+                    <h3>作品 10-5</h3>
+                    <p>align-self</p>
+                    <a href="week10/alignself.html" class="work-link" target="_blank">查看作品</a>
+                </div>
+                <div class="work-item">
+                    <h3>作品 10-6</h3>
+                    <p>花卉展示</p>
+                    <a href="week10/work.html" class="work-link" target="_blank">查看作品</a>
+                </div>
+            </div>
+
+
+
+
         </div>
     </div>
     
@@ -274,6 +331,32 @@
             // 確保沒有作品內容被顯示
             document.querySelectorAll('.work-content').forEach(content => {
                 content.classList.remove('active');
+            });
+        });
+        
+        // 主題切換功能
+        document.addEventListener('DOMContentLoaded', function() {
+            const themeToggle = document.getElementById('themeToggle');
+            const body = document.body;
+            
+            // 檢查本地存儲中的主題設置
+            const currentTheme = localStorage.getItem('theme');
+            if (currentTheme) {
+                body.classList.add(currentTheme);
+                themeToggle.textContent = currentTheme === 'dark-theme' ? '切換淺色' : '切換深色';
+            }
+            
+            // 切換主題
+            themeToggle.addEventListener('click', function() {
+                if (body.classList.contains('dark-theme')) {
+                    body.classList.remove('dark-theme');
+                    localStorage.setItem('theme', '');
+                    themeToggle.textContent = '切換深色';
+                } else {
+                    body.classList.add('dark-theme');
+                    localStorage.setItem('theme', 'dark-theme');
+                    themeToggle.textContent = '切換淺色';
+                }
             });
         });
     </script>
