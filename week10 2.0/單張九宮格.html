@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>單張九宮格圖片拼貼</title>
+    <style>
+        /* 九宮格容器的基本設置 */
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); /* 將容器分為3等份 */
+            grid-template-rows: repeat(3, 1fr);    /* 3行等高 */
+            gap: 5px;                             /* 縮小格子間距 */
+            width: 400px;                         /* 縮小寬度 */
+            height: 400px;                        /* 縮小高度 */
+            background-color: #ffffff;
+            border: 2px solid #333;              /* 縮小邊框寬度 */
+            padding: 8px;                         /* 縮小內邊距 */
+            margin: 15px;                         /* 縮小外邊距 */
+        }
+
+        /* 容器包裝器樣式 */
+        .containers-wrapper {
+            display: flex;
+            justify-content: center;
+            gap: 20px;                           /* 縮小九宮格之間的間距 */
+            flex-wrap: wrap;
+            padding: 15px;                       /* 縮小容器內邊距 */
+        }
+
+        /* 標題樣式 */
+        .grid-title {
+            text-align: center;
+            font-size: 16px;                     /* 縮小標題文字 */
+            margin-bottom: 8px;                  /* 縮小標題下方間距 */
+            font-weight: bold;
+        }
+
+        /* 每個九宮格區塊的容器 */
+        .grid-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* 每個格子的基本設置 */
+        .grid-item {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;     /* 隱藏超出範圍的圖片部分 */
+            position: relative;   /* 為絕對定位的圖片提供參考點 */
+        }
+
+        /* 圖片的基本設置 */
+        .grid-item img {
+            position: absolute;   /* 絕對定位，方便移動圖片位置 */
+            width: 300%;         /* 圖片寬度為容器的3倍 */
+            height: 300%;        /* 圖片高度為容器的3倍 */
+            object-fit: cover;    /* 確保圖片填滿容器 */
+            transition: all 0.5s ease;  /* 添加平滑過渡效果 */
+        }
+
+        /* 設定每個格子中圖片的位置 */
+        /* 第一行 */
+        .pos-0-0 img { left: 0; top: 0; }         /* 左上角 */
+        .pos-1-0 img { left: -100%; top: 0; }     /* 中上 */
+        .pos-2-0 img { left: -200%; top: 0; }     /* 右上角 */
+        /* 第二行 */
+        .pos-0-1 img { left: 0; top: -100%; }     /* 左中 */
+        .pos-1-1 img { left: -100%; top: -100%; } /* 正中心 */
+        .pos-2-1 img { left: -200%; top: -100%; } /* 右中 */
+        /* 第三行 */
+        .pos-0-2 img { left: 0; top: -200%; }     /* 左下角 */
+        .pos-1-2 img { left: -100%; top: -200%; } /* 中下 */
+        .pos-2-2 img { left: -200%; top: -200%; } /* 右下角 */
+
+        /* 按鈕容器樣式 */
+        .button-container {
+            margin: 20px 0;
+            display: flex;
+            gap: 10px;  /* 按鈕之間的間距 */
+        }
+
+        /* 按鈕基本樣式 */
+        .button {
+            padding: 10px 20px;                /* 內部間距 */
+            font-size: 16px;                   /* 文字大小 */
+            border: none;                      /* 移除邊框 */
+            border-radius: 5px;                /* 圓角效果 */
+            cursor: pointer;                   /* 滑鼠指針 */
+            transition: background-color 0.3s;  /* 顏色過渡效果 */
+            color: white;                      /* 文字顏色 */
+        }
+
+    </style>
+</head>
+<body>
+    <div class="containers-wrapper">
+        <!-- 打亂的九宮格 -->
+        <div class="grid-section">
+            <div class="grid-title">打亂的九宮格</div>
+            <div class="grid-container">
+                <div class="grid-item pos-1-1"><img src="GPTIMG.png" alt="九宮格1"></div>
+                <div class="grid-item pos-2-2"><img src="GPTIMG.png" alt="九宮格2"></div>
+                <div class="grid-item pos-0-1"><img src="GPTIMG.png" alt="九宮格3"></div>
+                <div class="grid-item pos-2-0"><img src="GPTIMG.png" alt="九宮格4"></div>
+                <div class="grid-item pos-1-2"><img src="GPTIMG.png" alt="九宮格5"></div>
+                <div class="grid-item pos-0-0"><img src="GPTIMG.png" alt="九宮格6"></div>
+                <div class="grid-item pos-2-1"><img src="GPTIMG.png" alt="九宮格7"></div>
+                <div class="grid-item pos-0-2"><img src="GPTIMG.png" alt="九宮格8"></div>
+                <div class="grid-item pos-1-0"><img src="GPTIMG.png" alt="九宮格9"></div>
+            </div>
+        </div>
+
+        <!-- 完整順序的九宮格 -->
+        <div class="grid-section">
+            <div class="grid-title">完整順序的九宮格</div>
+            <div class="grid-container">
+                <div class="grid-item pos-0-0"><img src="GPTIMG.png" alt="九宮格1"></div>
+                <div class="grid-item pos-1-0"><img src="GPTIMG.png" alt="九宮格2"></div>
+                <div class="grid-item pos-2-0"><img src="GPTIMG.png" alt="九宮格3"></div>
+                <div class="grid-item pos-0-1"><img src="GPTIMG.png" alt="九宮格4"></div>
+                <div class="grid-item pos-1-1"><img src="GPTIMG.png" alt="九宮格5"></div>
+                <div class="grid-item pos-2-1"><img src="GPTIMG.png" alt="九宮格6"></div>
+                <div class="grid-item pos-0-2"><img src="GPTIMG.png" alt="九宮格7"></div>
+                <div class="grid-item pos-1-2"><img src="GPTIMG.png" alt="九宮格8"></div>
+                <div class="grid-item pos-2-2"><img src="GPTIMG.png" alt="九宮格9"></div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
