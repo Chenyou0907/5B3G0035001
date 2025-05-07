@@ -6,7 +6,138 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>個人作品集</title>
     <link rel="stylesheet" href="styles3.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <link rel="icon" href="頭貼.png" type="image/x-icon">
+    <style>
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+        .loading-spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid #3498db;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .preview-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.85);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        .preview-content {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            width: 90%;
+            height: 90vh;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .preview-content iframe {
+            width: 100%;
+            height: calc(100% - 40px);
+            border: none;
+            border-radius: 5px;
+        }
+        .close-preview {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #ff4444;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+        .close-preview:hover {
+            background: #ff6666;
+            transform: scale(1.05);
+        }
+        .dark-theme .preview-content {
+            background: #333;
+        }
+        .dark-theme .preview-content iframe {
+            background: white;
+        }
+        .work-item {
+            transition: transform 0.3s ease;
+        }
+        .work-item:hover {
+            transform: scale(1.05);
+        }
+        /* 修改按鈕樣式 */
+        .work-link, .preview-btn {
+            display: inline-block;
+            padding: 8px 16px;
+            margin: 5px;
+            border-radius: 20px;
+            text-decoration: none;
+            color: white;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+        .work-link {
+            background: #4CAF50;
+        }
+        .preview-btn {
+            background: #2196F3;
+        }
+        .work-link:hover, .preview-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        .work-link:hover {
+            background: #45a049;
+        }
+        .preview-btn:hover {
+            background: #1976D2;
+        }
+        /* 暗色主題適配 */
+        .dark-theme .work-link {
+            background: #45a049;
+        }
+        .dark-theme .preview-btn {
+            background: #1976D2;
+        }
+        .dark-theme .work-link:hover {
+            background: #3d8b40;
+        }
+        .dark-theme .preview-btn:hover {
+            background: #1565C0;
+        }
+        /* 移除舊的預覽按鈕樣式 */
+        .preview-btn {
+            margin-left: 5px;
+        }
+    </style>
 </head>
 <body>
     <!-- 主題切換按鈕 -->
@@ -56,67 +187,293 @@
                 <h2>第二週周三作品(2月26日)</h2>
                 <div class="work-item">
                     <h3>作品 2-1</h3>
-                    <p>基礎語法練習</p>
+                    <div class="work-meta">
+                        <span class="work-date">完成日期：2024-02-26</span>
+                        <div class="work-tags">
+                            <span class="tag">HTML</span>
+                            <span class="tag">Structure</span>
+                            <span class="tag">Elements</span>
+                            <span class="tag">Semantics</span>
+                        </div>
+                    </div>
+                    <p>HTML基礎結構與語法實踐</p>
+                    <div class="work-description">
+                        <p>這是一個全面的HTML基礎語法練習作品，展示了網頁開發的核心元素與結構。主要特色包括：</p>
+                        <ul>
+                            <li><strong>文檔結構</strong> - 完整實現HTML5文檔的基本架構，包括DOCTYPE宣告、head和body區塊</li>
+                            <li><strong>語意化標籤</strong> - 運用header、nav、section等語意化元素，建立清晰的內容層級</li>
+                            <li><strong>文本格式化</strong> - 展示標題、段落、列表等文本元素的正確使用方式</li>
+                            <li><strong>超連結與媒體</strong> - 實現超連結和基本媒體元素的嵌入技術</li>
+                        </ul>
+                        <p>此作品為網頁開發課程的第一個實作練習，奠定了HTML文檔結構和元素運用的基礎知識。</p>
+                    </div>
                     <a href="基礎語法練習.html" class="work-link" target="_blank">查看作品</a>
+                    <button class="preview-btn" data-preview="基礎語法練習.html">預覽</button>
                 </div>
             </div>
             
-            <!-- 其他周次作品 -->
+            <!-- 第三週作品 -->
             <div class="work-content" id="week3">
                 <h2>第三週周三作品(3月5日)</h2>
                 <div class="work-item">
                     <h3>作品 3-1</h3>
-                    <p>輸入格加送出按鈕</p>
+                    <div class="work-meta">
+                        <span class="work-date">完成日期：2024-03-05</span>
+                        <div class="work-tags">
+                            <span class="tag">HTML</span>
+                            <span class="tag">Form</span>
+                            <span class="tag">UI Design</span>
+                            <span class="tag">User Input</span>
+                        </div>
+                    </div>
+                    <p>基礎表單設計與用戶輸入處理</p>
+                    <div class="work-description">
+                        <p>這是一個專注於表單基礎設計的實踐作品，展示了用戶輸入收集的基本方法。主要特色包括：</p>
+                        <ul>
+                            <li><strong>表單結構</strong> - 使用form元素正確建立表單容器，遵循HTML表單規範</li>
+                            <li><strong>輸入元素</strong> - 展示text類型輸入框的基本使用方式</li>
+                            <li><strong>提交控制</strong> - 實現提交按鈕功能，讓用戶可以完成表單操作</li>
+                            <li><strong>標籤關聯</strong> - 使用label元素增強表單可用性與無障礙性</li>
+                        </ul>
+                        <p>此作品是網頁互動性的第一步，為後續更複雜的表單設計打下基礎。</p>
+                    </div>
                     <a href="form.html" class="work-link" target="_blank">查看作品</a>
+                    <button class="preview-btn" data-preview="form.html">預覽</button>
                 </div>
                 <div class="work-item">
                     <h3>作品 3-2</h3>
-                    <p>email輸入格加一些功能按鈕</p>
+                    <div class="work-meta">
+                        <span class="work-date">完成日期：2024-03-05</span>
+                        <div class="work-tags">
+                            <span class="tag">HTML</span>
+                            <span class="tag">Email</span>
+                            <span class="tag">Form</span>
+                            <span class="tag">Validation</span>
+                        </div>
+                    </div>
+                    <p>電子郵件輸入與表單功能擴展</p>
+                    <div class="work-description">
+                        <p>這是一個展示表單進階功能的作品，專注於電子郵件格式驗證和功能性按鈕實現。主要特色包括：</p>
+                        <ul>
+                            <li><strong>類型驗證</strong> - 使用email類型輸入框實現自動格式驗證功能</li>
+                            <li><strong>多功能按鈕</strong> - 展示不同類型按鈕的使用方法，包括提交、重設與一般按鈕</li>
+                            <li><strong>HTML5驗證</strong> - 運用HTML5內建的表單驗證功能提升用戶體驗</li>
+                            <li><strong>表單反饋</strong> - 提供即時視覺反饋，優化用戶輸入流程</li>
+                        </ul>
+                        <p>此作品展示了如何提升表單的實用性和用戶友好度，為動態網頁互動奠定基礎。</p>
+                    </div>
                     <a href="inputtype.html" class="work-link" target="_blank">查看作品</a>
+                    <button class="preview-btn" data-preview="inputtype.html">預覽</button>
                 </div>
                 <div class="work-item">
                     <h3>作品 3-3</h3>
-                    <p>帳號密碼輸入格</p>
+                    <div class="work-meta">
+                        <span class="work-date">完成日期：2024-03-05</span>
+                        <div class="work-tags">
+                            <span class="tag">HTML</span>
+                            <span class="tag">Form</span>
+                            <span class="tag">Login</span>
+                            <span class="tag">Authentication</span>
+                        </div>
+                    </div>
+                    <p>用戶身份驗證表單設計</p>
+                    <div class="work-description">
+                        <p>這是一個模擬登入系統的表單設計作品，專注於帳號和密碼輸入功能的實現。主要特色包括：</p>
+                        <ul>
+                            <li><strong>安全輸入</strong> - 使用password類型輸入框保護用戶密碼隱私</li>
+                            <li><strong>標籤優化</strong> - 運用label元素與for屬性建立輸入控件關聯，提升可用性</li>
+                            <li><strong>視覺分組</strong> - 使用適當的視覺分組方式組織表單元素</li>
+                            <li><strong>提交處理</strong> - 實現表單提交功能以完成用戶登入流程</li>
+                        </ul>
+                        <p>此作品模擬了網站中常見的登入功能，展示了帳號系統基礎UI的實現方法。</p>
+                    </div>
                     <a href="label.html" class="work-link" target="_blank">查看作品</a>
+                    <button class="preview-btn" data-preview="label.html">預覽</button>
                 </div>
                 <div class="work-item">
                     <h3>作品 3-4</h3>
-                    <p>下拉式選單</p>
+                    <div class="work-meta">
+                        <span class="work-date">完成日期：2024-03-05</span>
+                        <div class="work-tags">
+                            <span class="tag">HTML</span>
+                            <span class="tag">Select</span>
+                            <span class="tag">Dropdown</span>
+                            <span class="tag">Options</span>
+                        </div>
+                    </div>
+                    <p>多選項下拉式選單設計</p>
+                    <div class="work-description">
+                        <p>這是一個專注於下拉式選單功能實現的作品，展示了選項集合的設計與使用。主要特色包括：</p>
+                        <ul>
+                            <li><strong>選項群組</strong> - 使用select元素創建統一的選項容器</li>
+                            <li><strong>多項選擇</strong> - 通過option元素提供多個可選項目</li>
+                            <li><strong>預設選擇</strong> - 設定默認選項提升用戶體驗</li>
+                            <li><strong>分組功能</strong> - 使用optgroup元素實現邏輯分組，提高選單可用性</li>
+                        </ul>
+                        <p>此作品展示了如何使用HTML原生元素實現有組織的資料選擇功能，適用於多種選項場景。</p>
+                    </div>
                     <a href="select.html" class="work-link" target="_blank">查看作品</a>
+                    <button class="preview-btn" data-preview="select.html">預覽</button>
                 </div>
                 <div class="work-item">
                     <h3>作品 3-5</h3>
-                    <p>行動電話使用意見調查表</p>
+                    <div class="work-meta">
+                        <span class="work-date">完成日期：2024-03-05</span>
+                        <div class="work-tags">
+                            <span class="tag">HTML</span>
+                            <span class="tag">Form</span>
+                            <span class="tag">Survey</span>
+                            <span class="tag">User Research</span>
+                        </div>
+                    </div>
+                    <p>行動裝置使用者調查系統</p>
+                    <div class="work-description">
+                        <p>這是一個綜合運用表單技術的實用調查系統，專為收集行動電話使用習慣反饋設計。主要特色包括：</p>
+                        <ul>
+                            <li><strong>多元輸入</strong> - 結合文本輸入、單選按鈕、複選框等多種輸入方式</li>
+                            <li><strong>邏輯分區</strong> - 使用fieldset和legend元素將相關問題分組</li>
+                            <li><strong>資料驗證</strong> - 實施基本的用戶輸入驗證，確保資料有效性</li>
+                            <li><strong>用戶體驗</strong> - 採用清晰的布局和指引，優化調查填寫流程</li>
+                        </ul>
+                        <p>此作品是本週所學表單技術的綜合應用，展示了如何創建功能完整的用戶調查表單。</p>
+                    </div>
                     <a href="phone.html" class="work-link" target="_blank">查看作品</a>
+                    <button class="preview-btn" data-preview="phone.html">預覽</button>
                 </div>
             </div>
             
+            <!-- 第四週作品 -->
             <div class="work-content" id="week4">
                 <h2>第四週周三作品(3月12日)</h2>
                 <div class="work-item">
                     <h3>作品 4-1</h3>
-                    <p>影片自動播放功能</p>
+                    <div class="work-meta">
+                        <span class="work-date">完成日期：2024-03-12</span>
+                        <div class="work-tags">
+                            <span class="tag">HTML5</span>
+                            <span class="tag">Video</span>
+                            <span class="tag">Autoplay</span>
+                            <span class="tag">Multimedia</span>
+                        </div>
+                    </div>
+                    <p>HTML5影片自動播放技術實現</p>
+                    <div class="work-description">
+                        <p>這是一個專注於HTML5影片自動播放功能的技術實現作品，展示了現代網頁多媒體功能。主要特色包括：</p>
+                        <ul>
+                            <li><strong>自動播放</strong> - 通過autoplay屬性實現頁面載入後的自動播放效果</li>
+                            <li><strong>影片嵌入</strong> - 使用HTML5 video元素正確嵌入影片內容</li>
+                            <li><strong>格式支援</strong> - 設定多種影片格式支援，確保跨瀏覽器兼容性</li>
+                            <li><strong>預載選項</strong> - 實踐不同的預載策略優化用戶體驗</li>
+                        </ul>
+                        <p>此作品展示了現代網頁如何無需外部插件即可提供豐富的多媒體體驗，代表網頁技術的進步。</p>
+                    </div>
                     <a href="video.html" class="work-link" target="_blank">查看作品</a>
+                    <button class="preview-btn" data-preview="video.html">預覽</button>
                 </div>
+                
                 <div class="work-item">
                     <h3>作品 4-2</h3>
-                    <p>影片播放功能按鈕</p>
+                    <div class="work-meta">
+                        <span class="work-date">完成日期：2024-03-12</span>
+                        <div class="work-tags">
+                            <span class="tag">HTML5</span>
+                            <span class="tag">Video</span>
+                            <span class="tag">Controls</span>
+                            <span class="tag">User Interface</span>
+                        </div>
+                    </div>
+                    <p>影片播放控制界面設計</p>
+                    <div class="work-description">
+                        <p>這是一個展示HTML5影片播放器控制功能的作品，著重於用戶控制介面的實現。主要特色包括：</p>
+                        <ul>
+                            <li><strong>播放控制</strong> - 通過controls屬性提供完整的播放控制界面</li>
+                            <li><strong>進度調整</strong> - 允許用戶通過進度條調整影片播放位置</li>
+                            <li><strong>音量控制</strong> - 實現音量調節功能，增強用戶體驗</li>
+                            <li><strong>全屏選項</strong> - 提供全屏播放模式，優化觀看體驗</li>
+                        </ul>
+                        <p>此作品展示了如何建立用戶友好的影片播放體驗，強調用戶對媒體內容的控制能力。</p>
+                    </div>
                     <a href="video2.html" class="work-link" target="_blank">查看作品</a>
+                    <button class="preview-btn" data-preview="video2.html">預覽</button>
                 </div>
+
                 <div class="work-item">
                     <h3>作品 4-3</h3>
-                    <p>Canva照片</p>
+                    <div class="work-meta">
+                        <span class="work-date">完成日期：2024-03-12</span>
+                        <div class="work-tags">
+                            <span class="tag">HTML</span>
+                            <span class="tag">Canva</span>
+                            <span class="tag">Image</span>
+                            <span class="tag">Design</span>
+                        </div>
+                    </div>
+                    <p>設計工具與網頁圖像整合</p>
+                    <div class="work-description">
+                        <p>這是一個結合Canva設計工具與網頁開發的作品，展示了如何將專業設計融入網頁中。主要特色包括：</p>
+                        <ul>
+                            <li><strong>圖像設計</strong> - 使用Canva創建專業風格的圖像素材</li>
+                            <li><strong>優化整合</strong> - 將設計作品正確整合到HTML結構中</li>
+                            <li><strong>視覺排版</strong> - 通過適當的排版展示設計元素，增強頁面吸引力</li>
+                            <li><strong>響應式顯示</strong> - 確保圖像在不同螢幕尺寸下的正確顯示</li>
+                        </ul>
+                        <p>此作品展示了網頁開發與視覺設計的結合，體現了現代網頁對視覺體驗的重視。</p>
+                    </div>
                     <a href="photo.html" class="work-link" target="_blank">查看作品</a>
+                    <button class="preview-btn" data-preview="photo.html">預覽</button>
                 </div>
+
                 <div class="work-item">
                     <h3>作品 4-4</h3>
-                    <p>選單前置教學內容</p>
+                    <div class="work-meta">
+                        <span class="work-date">完成日期：2024-03-12</span>
+                        <div class="work-tags">
+                            <span class="tag">HTML</span>
+                            <span class="tag">Fieldset</span>
+                            <span class="tag">Form</span>
+                            <span class="tag">Grouping</span>
+                        </div>
+                    </div>
+                    <p>表單元素分組與結構優化</p>
+                    <div class="work-description">
+                        <p>這是一個專注於表單結構優化的作品，展示了如何使用fieldset元素提升表單組織性。主要特色包括：</p>
+                        <ul>
+                            <li><strong>邏輯分組</strong> - 使用fieldset元素將相關表單元素進行邏輯分組</li>
+                            <li><strong>標題設定</strong> - 通過legend元素為每個分組添加清晰的標題</li>
+                            <li><strong>視覺分隔</strong> - 利用內建樣式建立視覺區分，提升表單可讀性</li>
+                            <li><strong>結構語義</strong> - 強化表單的語義結構，符合HTML標準實踐</li>
+                        </ul>
+                        <p>此作品展示了如何建立結構良好的表單，是前週表單學習的進階延伸和深化。</p>
+                    </div>
                     <a href="fieldset.html" class="work-link" target="_blank">查看作品</a>
+                    <button class="preview-btn" data-preview="fieldset.html">預覽</button>
                 </div>
+
                 <div class="work-item">
                     <h3>作品 4-5</h3>
-                    <p>完整表單製作加google表單加影片自動播放功能</p>
+                    <div class="work-meta">
+                        <span class="work-date">完成日期：2024-03-12</span>
+                        <div class="work-tags">
+                            <span class="tag">HTML</span>
+                            <span class="tag">Form</span>
+                            <span class="tag">Google Forms</span>
+                            <span class="tag">Integration</span>
+                            <span class="tag">Multimedia</span>
+                        </div>
+                    </div>
+                    <p>多功能整合型網頁應用</p>
+                    <div class="work-description">
+                        <p>這是一個綜合應用本週所學技術的複合型作品，結合了表單功能與多媒體元素。主要特色包括：</p>
+                        <ul>
+                            <li><strong>Google表單整合</strong> - 實現與Google表單服務的無縫整合，提供專業數據收集功能</li>
+                            <li><strong>多媒體融合</strong> - 結合自動播放影片與表單功能，創建豐富的用戶體驗</li>
+                            <li><strong>完整表單設計</strong> - 設計全面的表單結構，包含多種輸入元素與邏輯分組</li>
+                            <li><strong>服務整合</strong> - 展示如何將第三方服務融入自建網頁，擴展功能性</li>
+                        </ul>
+                        <p>此作品是本週學習的綜合成果，展示了如何結合多種技術創建功能豐富的網頁應用。</p>
+                    </div>
                     <a href="表單.html" class="work-link" target="_blank">查看作品</a>
+                    <button class="preview-btn" data-preview="表單.html">預覽</button>
                 </div>
             </div>
             
@@ -124,33 +481,153 @@
                 <h2>第五週周三作品(3月19日)</h2>
                 <div class="work-item">
                     <h3>作品 5-1</h3>
-                    <p>Css基本教學</p>
+                    <div class="work-meta">
+                        <span class="work-date">完成日期：2024-03-19</span>
+                        <div class="work-tags">
+                            <span class="tag">CSS</span>
+                            <span class="tag">Fundamentals</span>
+                            <span class="tag">Styling</span>
+                            <span class="tag">Selectors</span>
+                        </div>
+                    </div>
+                    <p>CSS語法基礎與選擇器運用</p>
+                    <div class="work-description">
+                        <p>這是一個全面介紹CSS基礎知識的入門作品，展示了網頁樣式控制的核心概念。主要特色包括：</p>
+                        <ul>
+                            <li><strong>選擇器類型</strong> - 展示元素、類、ID選擇器的使用方法與差異</li>
+                            <li><strong>屬性應用</strong> - 介紹常用CSS屬性的使用，包括顏色、字體、邊距等</li>
+                            <li><strong>盒模型概念</strong> - 解釋CSS盒模型的基本原理及其應用</li>
+                            <li><strong>樣式繼承</strong> - 展示CSS樣式繼承機制的工作原理</li>
+                        </ul>
+                        <p>此作品為CSS學習開啟了新的篇章，從基礎語法到實際應用，建立了樣式控制的重要基礎。</p>
+                    </div>
                     <a href="css-1.html" class="work-link" target="_blank">查看作品</a>
+                    <button class="preview-btn" data-preview="css-1.html">預覽</button>
                 </div>
                 <div class="work-item">
                     <h3>作品 5-2</h3>
-                    <p>css-external</p>
+                    <div class="work-meta">
+                        <span class="work-date">完成日期：2024-03-19</span>
+                        <div class="work-tags">
+                            <span class="tag">CSS</span>
+                            <span class="tag">External</span>
+                            <span class="tag">File Structure</span>
+                            <span class="tag">Organization</span>
+                        </div>
+                    </div>
+                    <p>外部CSS檔案結構與組織</p>
+                    <div class="work-description">
+                        <p>這是一個專注於CSS外部引用技術的作品，展示了樣式表分離的專業實踐。主要特色包括：</p>
+                        <ul>
+                            <li><strong>外部連結</strong> - 使用link元素正確引用外部CSS檔案</li>
+                            <li><strong>檔案組織</strong> - 展示如何組織獨立的CSS檔案，提高代碼維護性</li>
+                            <li><strong>選擇器優化</strong> - 在外部檔案中實現有效的選擇器結構</li>
+                            <li><strong>模組化設計</strong> - 體現CSS模組化設計理念，提升代碼重用性</li>
+                        </ul>
+                        <p>此作品展示了現代網頁開發中的樣式分離原則，為大型網站的CSS架構奠定基礎。</p>
+                    </div>
                     <a href="css-external.html" class="work-link" target="_blank">查看作品</a>
+                    <button class="preview-btn" data-preview="css-external.html">預覽</button>
                 </div>
                 <div class="work-item">
                     <h3>作品 5-3</h3>
-                    <p>css-internal</p>
+                    <div class="work-meta">
+                        <span class="work-date">完成日期：2024-03-19</span>
+                        <div class="work-tags">
+                            <span class="tag">CSS</span>
+                            <span class="tag">Internal</span>
+                            <span class="tag">Embedding</span>
+                            <span class="tag">Style Tags</span>
+                        </div>
+                    </div>
+                    <p>內嵌式CSS樣式技術</p>
+                    <div class="work-description">
+                        <p>這是一個展示CSS內部嵌入方法的技術作品，介紹了單一頁面樣式控制的實現。主要特色包括：</p>
+                        <ul>
+                            <li><strong>樣式標籤</strong> - 使用style元素在HTML文件頭部定義樣式</li>
+                            <li><strong>即時效果</strong> - 展示內嵌樣式的即時應用效果</li>
+                            <li><strong>作用範圍</strong> - 解釋內嵌樣式的作用範圍與局限性</li>
+                            <li><strong>選擇器應用</strong> - 在頁面內實現多樣化的選擇器運用</li>
+                        </ul>
+                        <p>此作品對比了內嵌與外部CSS的差異，幫助理解不同樣式應用方法的適用場景。</p>
+                    </div>
                     <a href="css-internal.html" class="work-link" target="_blank">查看作品</a>
+                    <button class="preview-btn" data-preview="css-internal.html">預覽</button>
                 </div>
                 <div class="work-item">
                     <h3>作品 5-4</h3>
-                    <p>背景圖重疊</p>
+                    <div class="work-meta">
+                        <span class="work-date">完成日期：2024-03-19</span>
+                        <div class="work-tags">
+                            <span class="tag">CSS</span>
+                            <span class="tag">Background</span>
+                            <span class="tag">Repeat</span>
+                            <span class="tag">Layering</span>
+                        </div>
+                    </div>
+                    <p>背景圖像控制與重疊技術</p>
+                    <div class="work-description">
+                        <p>這是一個專注於CSS背景圖像處理的進階作品，展示了背景圖片的多種控制方法。主要特色包括：</p>
+                        <ul>
+                            <li><strong>重複模式</strong> - 使用background-repeat屬性控制圖像重複方式</li>
+                            <li><strong>位置控制</strong> - 通過background-position屬性精確定位背景圖像</li>
+                            <li><strong>大小設定</strong> - 運用background-size屬性調整背景圖像尺寸</li>
+                            <li><strong>多層效果</strong> - 實現背景圖像的疊加和混合效果</li>
+                        </ul>
+                        <p>此作品展示了CSS背景處理的強大能力，為網頁設計提供了豐富的視覺表現可能性。</p>
+                    </div>
                     <a href="background-repeat.html" class="work-link" target="_blank">查看作品</a>
+                    <button class="preview-btn" data-preview="background-repeat.html">預覽</button>
                 </div>
                 <div class="work-item">
                     <h3>作品 5-5</h3>
-                    <p>台南景點介紹</p>
+                    <div class="work-meta">
+                        <span class="work-date">完成日期：2024-03-19</span>
+                        <div class="work-tags">
+                            <span class="tag">CSS</span>
+                            <span class="tag">Travel</span>
+                            <span class="tag">Layout</span>
+                            <span class="tag">Content Design</span>
+                        </div>
+                    </div>
+                    <p>台南旅遊內容頁面設計</p>
+                    <div class="work-description">
+                        <p>這是一個結合CSS樣式與內容設計的主題網頁作品，聚焦於台南景點的視覺呈現。主要特色包括：</p>
+                        <ul>
+                            <li><strong>主題風格</strong> - 建立與台南文化相符的視覺設計風格</li>
+                            <li><strong>圖文結合</strong> - 優化圖片與說明文字的排版關係</li>
+                            <li><strong>顏色搭配</strong> - 運用協調的配色方案增強視覺吸引力</li>
+                            <li><strong>內容層次</strong> - 透過CSS強化內容的視覺層次感</li>
+                        </ul>
+                        <p>此作品是CSS知識的實際應用，將技術與內容創作相結合，展現了網頁設計的基本原則。</p>
+                    </div>
                     <a href="台南景點介紹.html" class="work-link" target="_blank">查看作品</a>
+                    <button class="preview-btn" data-preview="台南景點介紹.html">預覽</button>
                 </div>
                 <div class="work-item">
                     <h3>作品 5-6</h3>
-                    <p>台南景點介紹2.0</p>
+                    <div class="work-meta">
+                        <span class="work-date">完成日期：2024-03-19</span>
+                        <div class="work-tags">
+                            <span class="tag">CSS</span>
+                            <span class="tag">Advanced</span>
+                            <span class="tag">UI Design</span>
+                            <span class="tag">Visual Enhancement</span>
+                        </div>
+                    </div>
+                    <p>台南景點進階視覺呈現</p>
+                    <div class="work-description">
+                        <p>這是一個對台南景點介紹進行視覺升級的改進作品，運用了更多進階CSS技術。主要特色包括：</p>
+                        <ul>
+                            <li><strong>視覺效果</strong> - 添加過渡、陰影等效果提升頁面質感</li>
+                            <li><strong>版面優化</strong> - 改進排版結構，提供更佳的內容閱讀體驗</li>
+                            <li><strong>響應考量</strong> - 加入基本的響應式設計元素</li>
+                            <li><strong>交互增強</strong> - 加入簡單的懸停效果，增加頁面互動性</li>
+                        </ul>
+                        <p>此作品是對前一版本的全面提升，展示了CSS在提升用戶體驗方面的應用價值，體現了網頁設計的迭代優化過程。</p>
+                    </div>
                     <a href="台南景點介紹2.0.html" class="work-link" target="_blank">查看作品</a>
+                    <button class="preview-btn" data-preview="台南景點介紹2.0.html">預覽</button>
                 </div>
             </div>
             
@@ -158,98 +635,437 @@
                 <h2>第六週周三作品(3月26日)</h2>
                 <div class="work-item">
                     <h3>作品 6-1</h3>
-                    <p>css-box-0</p>
+                    <div class="work-meta">
+                        <span class="work-date">完成日期：2024-03-26</span>
+                        <div class="work-tags">
+                            <span class="tag">CSS</span>
+                            <span class="tag">Box Model</span>
+                            <span class="tag">Layout</span>
+                            <span class="tag">Spacing</span>
+                        </div>
+                    </div>
+                    <p>CSS盒模型基礎與應用</p>
+                    <div class="work-description">
+                        <p>這是一個專注於CSS盒模型基礎概念的實踐作品，展示了網頁元素的空間控制原理。主要特色包括：</p>
+                        <ul>
+                            <li><strong>盒模型解析</strong> - 詳細展示內容、填充、邊框和邊距的關係與作用</li>
+                            <li><strong>尺寸計算</strong> - 說明不同盒模型下元素尺寸的計算方式</li>
+                            <li><strong>邊框效果</strong> - 實現各種邊框樣式、寬度和顏色的應用</li>
+                            <li><strong>間距控制</strong> - 使用margin和padding屬性實現元素間距的精確控制</li>
+                        </ul>
+                        <p>此作品奠定了CSS佈局的重要基礎，是理解網頁元素空間關係的關鍵。</p>
+                    </div>
                     <a href="css-box-0.html" class="work-link" target="_blank">查看作品</a>
+                    <button class="preview-btn" data-preview="css-box-0.html">預覽</button>
                 </div>
                 <div class="work-item">
                     <h3>作品 6-2</h3>
-                    <p>練習1</p>
+                    <div class="work-meta">
+                        <span class="work-date">完成日期：2024-03-26</span>
+                        <div class="work-tags">
+                            <span class="tag">CSS</span>
+                            <span class="tag">Selectors</span>
+                            <span class="tag">Properties</span>
+                            <span class="tag">Text Styling</span>
+                        </div>
+                    </div>
+                    <p>CSS選擇器與文本樣式</p>
+                    <div class="work-description">
+                        <p>這是一個展示CSS選擇器運用與文本樣式控制的練習作品，聚焦於文字呈現效果。主要特色包括：</p>
+                        <ul>
+                            <li><strong>多元選擇器</strong> - 運用類別、ID、後代選擇器等多種方式精確選取元素</li>
+                            <li><strong>字體控制</strong> - 展示字體家族、大小、粗細等文本屬性的設定方法</li>
+                            <li><strong>顏色應用</strong> - 使用不同色彩表示法（命名、十六進制、RGB）設定文本顏色</li>
+                            <li><strong>對齊與間距</strong> - 實現文本對齊、行高和字符間距的控制技巧</li>
+                        </ul>
+                        <p>此作品展示了如何通過CSS精確控制網頁文本元素的視覺效果，提升內容可讀性和美觀度。</p>
+                    </div>
                     <a href="練習1.html" class="work-link" target="_blank">查看作品</a>
+                    <button class="preview-btn" data-preview="練習1.html">預覽</button>
                 </div>
                 <div class="work-item">
                     <h3>作品 6-3</h3>
-                    <p>練習2</p>
+                    <div class="work-meta">
+                        <span class="work-date">完成日期：2024-03-26</span>
+                        <div class="work-tags">
+                            <span class="tag">CSS</span>
+                            <span class="tag">Background</span>
+                            <span class="tag">Images</span>
+                            <span class="tag">Positioning</span>
+                        </div>
+                    </div>
+                    <p>背景與定位技術實現</p>
+                    <div class="work-description">
+                        <p>這是一個聚焦於CSS背景控制和元素定位的進階練習作品，探索空間排列的多種可能性。主要特色包括：</p>
+                        <ul>
+                            <li><strong>背景處理</strong> - 運用多種背景屬性（顏色、圖像、重複、位置）創建豐富視覺效果</li>
+                            <li><strong>元素定位</strong> - 實踐相對、絕對和固定定位方法，控制元素在頁面中的確切位置</li>
+                            <li><strong>疊層管理</strong> - 使用z-index屬性控制元素的視覺堆疊順序</li>
+                            <li><strong>浮動技巧</strong> - 展示float屬性的使用方法和常見應用場景</li>
+                        </ul>
+                        <p>此作品展現了CSS空間控制的進階技術，為創建複雜頁面佈局奠定了基礎。</p>
+                    </div>
                     <a href="練習2.html" class="work-link" target="_blank">查看作品</a>
+                    <button class="preview-btn" data-preview="練習2.html">預覽</button>
                 </div>
                 <div class="work-item">
                     <h3>作品 6-4</h3>
-                    <p>練習3</p>
+                    <div class="work-meta">
+                        <span class="work-date">完成日期：2024-03-26</span>
+                        <div class="work-tags">
+                            <span class="tag">CSS</span>
+                            <span class="tag">Advanced</span>
+                            <span class="tag">Visual Effects</span>
+                            <span class="tag">Transitions</span>
+                        </div>
+                    </div>
+                    <p>CSS視覺效果與互動體驗</p>
+                    <div class="work-description">
+                        <p>這是一個展示CSS進階視覺效果和互動技術的綜合作品，創造了豐富的用戶體驗。主要特色包括：</p>
+                        <ul>
+                            <li><strong>視覺效果</strong> - 實現陰影、透明度、漸變等增強頁面吸引力的視覺效果</li>
+                            <li><strong>變形操作</strong> - 運用transform屬性實現元素的縮放、旋轉和傾斜</li>
+                            <li><strong>過渡動畫</strong> - 使用transition屬性創建平滑的狀態變化效果</li>
+                            <li><strong>互動反饋</strong> - 實現豐富的懸停、點擊等用戶互動視覺反饋</li>
+                        </ul>
+                        <p>此作品展示了CSS在增強用戶體驗方面的強大能力，創造了具有動態感和視覺吸引力的網頁元素。</p>
+                    </div>
                     <a href="練習3.html" class="work-link" target="_blank">查看作品</a>
+                    <button class="preview-btn" data-preview="練習3.html">預覽</button>
                 </div>
                 <div class="work-item">
                     <h3>作品 6-5</h3>
-                    <p>呈上周台南介紹</p>
+                    <div class="work-meta">
+                        <span class="work-date">完成日期：2024-03-26</span>
+                        <div class="work-tags">
+                            <span class="tag">CSS</span>
+                            <span class="tag">Iteration</span>
+                            <span class="tag">UX Design</span>
+                            <span class="tag">Enhancement</span>
+                        </div>
+                    </div>
+                    <p>台南旅遊網頁設計優化</p>
+                    <div class="work-description">
+                        <p>這是一個延續上週台南景點介紹的改進版作品，運用了本週學習的CSS技術進行全面提升。主要特色包括：</p>
+                        <ul>
+                            <li><strong>盒模型應用</strong> - 使用盒模型原理優化內容布局和間距</li>
+                            <li><strong>層次分明</strong> - 通過定位和z-index技術創建清晰的視覺層次</li>
+                            <li><strong>視覺一致性</strong> - 建立統一的色彩系統和元素風格</li>
+                            <li><strong>用戶體驗</strong> - 增加互動效果和視覺反饋，提升頁面可用性</li>
+                        </ul>
+                        <p>此作品展示了網頁設計的迭代過程，通過應用新學技術持續改進既有作品，反映了專業網頁開發的工作流程。</p>
+                    </div>
                     <a href="呈上周台南介紹.html" class="work-link" target="_blank">查看作品</a>
+                    <button class="preview-btn" data-preview="呈上周台南介紹.html">預覽</button>
                 </div>
-                
             </div>
 
             <div class="work-content" id="week8">
                 <h2>第八週週三作品(4月9日)</h2>
                 <div class="work-item">
                     <h3>作品 8-1</h3>
-                    <p>兩張照片中間文字介紹</p>
+                    <div class="work-meta">
+                        <span class="work-date">完成日期：2024-04-09</span>
+                        <div class="work-tags">
+                            <span class="tag">CSS</span>
+                            <span class="tag">Background</span>
+                            <span class="tag">Positioning</span>
+                            <span class="tag">Content Layout</span>
+                        </div>
+                    </div>
+                    <p>背景定位與內容排版設計</p>
+                    <div class="work-description">
+                        <p>這是一個探索CSS背景圖像定位與文字內容結合的設計作品，創造了圖文交錯的視覺效果。主要特色包括：</p>
+                        <ul>
+                            <li><strong>背景定位技術</strong> - 使用background-position屬性精確控制背景圖像位置</li>
+                            <li><strong>對比與平衡</strong> - 在圖像與文字之間創建視覺平衡，增強內容可讀性</li>
+                            <li><strong>分層設計</strong> - 運用多層次結構實現內容的層次感與深度</li>
+                            <li><strong>響應式考量</strong> - 確保在不同視口尺寸下維持設計完整性</li>
+                        </ul>
+                        <p>此作品展示了如何運用CSS背景技術創建具有專業視覺效果的頁面佈局，使圖像與文字內容融為一體。</p>
+                    </div>
                     <a href="week8/bgposition.html" class="work-link" target="_blank">查看作品</a>
+                    <button class="preview-btn" data-preview="week8/bgposition.html">預覽</button>
                 </div>
                 <div class="work-item">
                     <h3>作品 8-2</h3>
-                    <p>CSS Selecto選擇器</p>
+                    <div class="work-meta">
+                        <span class="work-date">完成日期：2024-04-09</span>
+                        <div class="work-tags">
+                            <span class="tag">CSS</span>
+                            <span class="tag">Selectors</span>
+                            <span class="tag">Specificity</span>
+                            <span class="tag">Targeting</span>
+                        </div>
+                    </div>
+                    <p>CSS選擇器原理與應用機制</p>
+                    <div class="work-description">
+                        <p>這是一個深入探討CSS選擇器機制與使用方法的技術作品，提供了全面的選擇器指南。主要特色包括：</p>
+                        <ul>
+                            <li><strong>選擇器類型</strong> - 系統性展示元素、類、ID、屬性和偽類選擇器的使用方法</li>
+                            <li><strong>組合選擇器</strong> - 演示子代、後代、相鄰和通用兄弟選擇器的功能差異</li>
+                            <li><strong>特異性規則</strong> - 解釋CSS選擇器特異性計算與樣式優先級的關係</li>
+                            <li><strong>實際應用</strong> - 提供實例展示如何在複雜結構中精確定位元素</li>
+                        </ul>
+                        <p>此作品是CSS選擇器的全面指南，為精確控制網頁元素樣式提供了系統化的知識基礎。</p>
+                    </div>
                     <a href="week8/CSS Selector 選擇器.html" class="work-link" target="_blank">查看作品</a>
+                    <button class="preview-btn" data-preview="week8/CSS Selector 選擇器.html">預覽</button>
                 </div>
                 <div class="work-item">
                     <h3>作品 8-3</h3>
-                    <p>彩虹顏色</p>
+                    <div class="work-meta">
+                        <span class="work-date">完成日期：2024-04-09</span>
+                        <div class="work-tags">
+                            <span class="tag">CSS</span>
+                            <span class="tag">Gradients</span>
+                            <span class="tag">Colors</span>
+                            <span class="tag">Visual Effects</span>
+                        </div>
+                    </div>
+                    <p>線性漸層彩虹效果實現</p>
+                    <div class="work-description">
+                        <p>這是一個展示CSS線性漸層色彩技術的視覺效果作品，創造了鮮明的彩虹色彩過渡。主要特色包括：</p>
+                        <ul>
+                            <li><strong>漸層技術</strong> - 使用linear-gradient函數實現平滑的色彩過渡</li>
+                            <li><strong>色彩控制</strong> - 透過精確的色彩選擇和控制點位置創建視覺連續性</li>
+                            <li><strong>方向控制</strong> - 展示不同角度和方向的漸層效果</li>
+                            <li><strong>重複漸層</strong> - 利用repeating-linear-gradient創建重複色彩模式</li>
+                        </ul>
+                        <p>此作品展示了CSS漸層功能的強大能力，可用於創建從簡單到複雜的各種視覺效果，無需依賴外部圖像資源。</p>
+                    </div>
                     <a href="week8/linear.html" class="work-link" target="_blank">查看作品</a>
+                    <button class="preview-btn" data-preview="week8/linear.html">預覽</button>
                 </div>
                 <div class="work-item">
                     <h3>作品 8-4</h3>
-                    <p>選擇器測試1</p>
+                    <div class="work-meta">
+                        <span class="work-date">完成日期：2024-04-09</span>
+                        <div class="work-tags">
+                            <span class="tag">CSS</span>
+                            <span class="tag">Selectors</span>
+                            <span class="tag">Basics</span>
+                            <span class="tag">Element Targeting</span>
+                        </div>
+                    </div>
+                    <p>CSS選擇器基礎原理與實踐</p>
+                    <div class="work-description">
+                        <p>這是一個聚焦於CSS基礎選擇器運用的入門級作品，為初學者提供選擇器概念的實踐經驗。主要特色包括：</p>
+                        <ul>
+                            <li><strong>基本選擇器</strong> - 詳細演示通用、元素、類別和ID選擇器的使用方法</li>
+                            <li><strong>簡單結構</strong> - 通過簡單清晰的HTML結構展示選擇器的工作原理</li>
+                            <li><strong>視覺反饋</strong> - 使用明顯的色彩和樣式變化直觀展示選擇效果</li>
+                            <li><strong>代碼解析</strong> - 提供每個選擇器的語法解釋和使用場景</li>
+                        </ul>
+                        <p>此作品是CSS選擇器學習的基石，以循序漸進的方式建立對元素選擇機制的理解。</p>
+                    </div>
                     <a href="week8/selector1.html" class="work-link" target="_blank">查看作品</a>
+                    <button class="preview-btn" data-preview="week8/selector1.html">預覽</button>
                 </div>
                 <div class="work-item">
                     <h3>作品 8-5</h3>
-                    <p>選擇器測試2</p>
+                    <div class="work-meta">
+                        <span class="work-date">完成日期：2024-04-09</span>
+                        <div class="work-tags">
+                            <span class="tag">CSS</span>
+                            <span class="tag">Advanced Selectors</span>
+                            <span class="tag">Pseudo-classes</span>
+                            <span class="tag">Combinators</span>
+                        </div>
+                    </div>
+                    <p>CSS進階選擇器技術與應用</p>
+                    <div class="work-description">
+                        <p>這是一個深入探索CSS進階選擇器機制的技術作品，展示了複雜選擇情境的解決方案。主要特色包括：</p>
+                        <ul>
+                            <li><strong>偽類選擇器</strong> - 展示:hover、:nth-child等偽類選擇器的運用</li>
+                            <li><strong>組合選擇器</strong> - 實踐子元素、後代、相鄰兄弟等複合選擇技術</li>
+                            <li><strong>屬性選擇器</strong> - 演示如何基於元素屬性值進行精確選擇</li>
+                            <li><strong>高效選擇</strong> - 提供複雜DOM結構中高效定位特定元素的策略</li>
+                        </ul>
+                        <p>此作品建立在基礎選擇器知識之上，引領學習者進入更高階的CSS選擇技術領域，適用於處理複雜頁面結構。</p>
+                    </div>
                     <a href="week8/selector2.html" class="work-link" target="_blank">查看作品</a>
+                    <button class="preview-btn" data-preview="week8/selector2.html">預覽</button>
                 </div>
                 <div class="work-item">
                     <h3>作品 8-6</h3>
-                    <p>最後作業</p>
+                    <div class="work-meta">
+                        <span class="work-date">完成日期：2024-04-09</span>
+                        <div class="work-tags">
+                            <span class="tag">CSS</span>
+                            <span class="tag">Integration</span>
+                            <span class="tag">Best Practices</span>
+                            <span class="tag">Project Work</span>
+                        </div>
+                    </div>
+                    <p>CSS選擇器與樣式綜合應用</p>
+                    <div class="work-description">
+                        <p>這是一個綜合運用本週所學CSS技術的集大成作品，展示了如何在實際項目中整合各種選擇器和樣式技術。主要特色包括：</p>
+                        <ul>
+                            <li><strong>技術整合</strong> - 結合基礎與進階選擇器、背景技術和漸層效果於一體</li>
+                            <li><strong>結構優化</strong> - 展示CSS選擇器在優化HTML結構方面的應用</li>
+                            <li><strong>維護性考量</strong> - 實踐可維護的CSS組織方法與命名策略</li>
+                            <li><strong>跨瀏覽器兼容</strong> - 確保樣式在不同瀏覽器中的一致性</li>
+                        </ul>
+                        <p>此作品是對本週CSS學習的全面驗收，展示了如何在實際項目中系統地應用CSS知識，創建既美觀又具有技術深度的網頁。</p>
+                    </div>
                     <a href="week8/最後作業.html" class="work-link" target="_blank">查看作品</a>
+                    <button class="preview-btn" data-preview="week8/最後作業.html">預覽</button>
                 </div>
                 <h2>第八週週四作品(4月10日)</h2>
                 <div class="work-item">
                     <h3>作品 8-1</h3>
-                    <p>基本圓餅圖</p>
+                    <div class="work-meta">
+                        <span class="work-date">完成日期：2024-04-10</span>
+                        <div class="work-tags">
+                            <span class="tag">CSS</span>
+                            <span class="tag">Pie Chart</span>
+                            <span class="tag">Data Visualization</span>
+                            <span class="tag">Border Radius</span>
+                        </div>
+                    </div>
+                    <p>CSS純代碼圓餅圖視覺化</p>
+                    <div class="work-description">
+                        <p>這是一個展示如何純用CSS創建視覺化圓餅圖的技術作品，無需任何JavaScript或圖形庫。主要特色包括：</p>
+                        <ul>
+                            <li><strong>圓形塑造</strong> - 使用border-radius屬性創建完美圓形基礎</li>
+                            <li><strong>扇形構建</strong> - 通過精確控制遮罩和旋轉角度實現扇形區域</li>
+                            <li><strong>色彩分區</strong> - 運用對比鮮明的色彩區分不同數據分類</li>
+                            <li><strong>純CSS技術</strong> - 完全依靠CSS實現數據視覺化，展示CSS的強大表現能力</li>
+                        </ul>
+                        <p>此作品展示了CSS在數據視覺化領域的應用潛力，提供了輕量級的圖表解決方案，適用於簡單的數據展示場景。</p>
+                    </div>
                     <a href="week8 2.0/圓餅圖.html" class="work-link" target="_blank">查看作品</a>
+                    <button class="preview-btn" data-preview="week8 2.0/圓餅圖.html">預覽</button>
                 </div>
                 <div class="work-item">
                     <h3>作品 8-2</h3>
-                    <p>進階圓餅圖(雖然是AI給我範本我去改的)</p>
+                    <div class="work-meta">
+                        <span class="work-date">完成日期：2024-04-10</span>
+                        <div class="work-tags">
+                            <span class="tag">CSS</span>
+                            <span class="tag">Advanced Charts</span>
+                            <span class="tag">Pseudo Elements</span>
+                            <span class="tag">Transforms</span>
+                        </div>
+                    </div>
+                    <p>進階圓餅圖與數據互動</p>
+                    <div class="work-description">
+                        <p>這是一個基於前作的進階圓餅圖實現，加入了更複雜的視覺效果和互動元素。主要特色包括：</p>
+                        <ul>
+                            <li><strong>多層次結構</strong> - 運用偽元素和嵌套結構創建複雜的圖形層次</li>
+                            <li><strong>精細控制</strong> - 通過計算精確的角度值實現更準確的數據比例表示</li>
+                            <li><strong>懸停效果</strong> - 加入懸停交互，增強用戶與數據的互動體驗</li>
+                            <li><strong>標籤整合</strong> - 結合文字標籤，提供更完整的數據上下文信息</li>
+                        </ul>
+                        <p>此作品展示了CSS進階技術在數據可視化領域的應用深度，實現了既美觀又實用的圓餅圖表現形式。</p>
+                    </div>
                     <a href="week8 2.0/圓餅圖2.0.html" class="work-link" target="_blank">查看作品</a>
+                    <button class="preview-btn" data-preview="week8 2.0/圓餅圖2.0.html">預覽</button>
                 </div>
                 <div class="work-item">
                     <h3>作品 8-3</h3>
-                    <p>模糊對比</p>
+                    <div class="work-meta">
+                        <span class="work-date">完成日期：2024-04-10</span>
+                        <div class="work-tags">
+                            <span class="tag">CSS</span>
+                            <span class="tag">Filters</span>
+                            <span class="tag">Blur Effect</span>
+                            <span class="tag">Image Processing</span>
+                        </div>
+                    </div>
+                    <p>CSS濾鏡模糊效果技術</p>
+                    <div class="work-description">
+                        <p>這是一個探索CSS filter屬性中模糊效果功能的實驗性作品，展示了影像處理技術。主要特色包括：</p>
+                        <ul>
+                            <li><strong>模糊控制</strong> - 使用blur()函數實現不同程度的模糊視覺效果</li>
+                            <li><strong>對比展示</strong> - 通過並排比較展示不同模糊參數的效果差異</li>
+                            <li><strong>選擇性模糊</strong> - 針對特定元素應用模糊效果，保持其他元素清晰</li>
+                            <li><strong>交互變化</strong> - 結合懸停狀態，實現動態模糊效果的切換</li>
+                        </ul>
+                        <p>此作品展示了CSS濾鏡在創建焦點引導和視覺效果方面的應用技巧，提供了不依賴圖像編輯軟件的網頁內影像處理方案。</p>
+                    </div>
                     <a href="week8 2.0/filter1.html" class="work-link" target="_blank">查看作品</a>
+                    <button class="preview-btn" data-preview="week8 2.0/filter1.html">預覽</button>
                 </div>
                 <div class="work-item">
                     <h3>作品 8-4</h3>
-                    <p>亮度對比</p>
+                    <div class="work-meta">
+                        <span class="work-date">完成日期：2024-04-10</span>
+                        <div class="work-tags">
+                            <span class="tag">CSS</span>
+                            <span class="tag">Brightness</span>
+                            <span class="tag">Contrast</span>
+                            <span class="tag">Visual Effects</span>
+                        </div>
+                    </div>
+                    <p>亮度與對比度濾鏡效果</p>
+                    <div class="work-description">
+                        <p>這是一個專注於CSS亮度調整濾鏡效果的技術探索作品，展示了視覺氛圍的控制方法。主要特色包括：</p>
+                        <ul>
+                            <li><strong>亮度控制</strong> - 運用brightness()函數調整元素的明暗程度</li>
+                            <li><strong>對比度增強</strong> - 結合contrast()函數強化畫面的對比效果</li>
+                            <li><strong>漸進展示</strong> - 通過序列展示不同參數值的視覺差異</li>
+                            <li><strong>複合效果</strong> - 組合多種濾鏡函數創建複雜的視覺效果</li>
+                        </ul>
+                        <p>此作品展示了如何在網頁中實現專業的亮度和對比度調整效果，為內容呈現提供更多視覺控制的可能性。</p>
+                    </div>
                     <a href="week8 2.0/filter2.html" class="work-link" target="_blank">查看作品</a>
+                    <button class="preview-btn" data-preview="week8 2.0/filter2.html">預覽</button>
                 </div>
                 <div class="work-item">
                     <h3>作品 8-5</h3>
-                    <p>陰影對比</p>
+                    <div class="work-meta">
+                        <span class="work-date">完成日期：2024-04-10</span>
+                        <div class="work-tags">
+                            <span class="tag">CSS</span>
+                            <span class="tag">Drop Shadow</span>
+                            <span class="tag">Lighting</span>
+                            <span class="tag">Depth Effects</span>
+                        </div>
+                    </div>
+                    <p>濾鏡陰影效果與深度表現</p>
+                    <div class="work-description">
+                        <p>這是一個探索CSS濾鏡陰影效果的創意作品，展示了如何創建具有空間感的視覺元素。主要特色包括：</p>
+                        <ul>
+                            <li><strong>濾鏡陰影</strong> - 使用drop-shadow()函數創建順應元素形狀的陰影效果</li>
+                            <li><strong>多重陰影</strong> - 疊加多個陰影效果創造豐富的光影層次</li>
+                            <li><strong>深度暗示</strong> - 通過陰影的方向和強度傳達空間深度感</li>
+                            <li><strong>與盒陰影對比</strong> - 展示濾鏡陰影相較於傳統box-shadow的獨特優勢</li>
+                        </ul>
+                        <p>此作品展示了CSS濾鏡陰影技術在增強視覺層次和空間感方面的應用，為網頁設計提供了更精細的視覺表現工具。</p>
+                    </div>
                     <a href="week8 2.0/filter3.html" class="work-link" target="_blank">查看作品</a>
+                    <button class="preview-btn" data-preview="week8 2.0/filter3.html">預覽</button>
                 </div>
             </div>
 
             <div class="work-content" id="week9">
                 <h2>第九週周四考試(4月17日)</h2>
                 <div class="work-item">
-                    <h3>考試</h3>
-                    <p>網頁設計</p>
+                    <h3>考試作品</h3>
+                    <div class="work-meta">
+                        <span class="work-date">完成日期：2024-04-17</span>
+                        <div class="work-tags">
+                            <span class="tag">HTML</span>
+                            <span class="tag">CSS</span>
+                            <span class="tag">Midterm</span>
+                            <span class="tag">Comprehensive Design</span>
+                        </div>
+                    </div>
+                    <p>網頁設計期中實作評量</p>
+                    <div class="work-description">
+                        <p>這是一個融合前八週所學知識的綜合性期中評量作品，展示了完整網頁設計的實踐能力。主要特色包括：</p>
+                        <ul>
+                            <li><strong>結構規劃</strong> - 運用語意化HTML5標籤建立清晰的頁面架構與內容層級</li>
+                            <li><strong>視覺設計</strong> - 應用CSS樣式、配色原則和排版技巧創建協調的視覺體驗</li>
+                            <li><strong>元素控制</strong> - 結合選擇器、盒模型和定位技術實現精確的元素控制</li>
+                            <li><strong>互動體驗</strong> - 加入懸停效果、過渡動畫等增強用戶互動體驗</li>
+                        </ul>
+                        <p>此作品是對前八週學習成果的全面檢驗，體現了從構思到實現完整網頁的能力，標誌著基礎網頁開發技能的階段性成就。</p>
+                    </div>
                     <a href="week9 test/index.html" class="work-link" target="_blank">查看作品</a>
+                    <button class="preview-btn" data-preview="week9 test/index.html">預覽</button>
                 </div>
             </div>
 
@@ -257,44 +1073,204 @@
                 <h2>第十週周三作品(4月23日)</h2>
                 <div class="work-item">
                     <h3>作品 10-1</h3>
-                    <p>flex練習1</p>
+                    <div class="work-meta">
+                        <span class="work-date">完成日期：2024-04-23</span>
+                        <div class="work-tags">
+                            <span class="tag">CSS</span>
+                            <span class="tag">Flexbox</span>
+                            <span class="tag">Layout</span>
+                            <span class="tag">Basics</span>
+                        </div>
+                    </div>
+                    <p>Flexbox基礎佈局原理</p>
+                    <div class="work-description">
+                        <p>這是一個介紹CSS Flexbox佈局模型基本原理的入門作品，展示了這一現代佈局技術的核心概念。主要特色包括：</p>
+                        <ul>
+                            <li><strong>容器屬性</strong> - 展示display: flex及其創建的彈性容器特性</li>
+                            <li><strong>主軸對齊</strong> - 通過justify-content屬性控制主軸方向的元素排列</li>
+                            <li><strong>交叉軸對齊</strong> - 運用align-items屬性設定交叉軸方向的元素對齊</li>
+                            <li><strong>方向控制</strong> - 使用flex-direction屬性改變主軸方向，影響排列順序</li>
+                        </ul>
+                        <p>此作品建立了Flexbox佈局的基礎概念，為掌握這一強大而靈活的網頁佈局技術奠定基礎。</p>
+                    </div>
                     <a href="week10/flex1.html" class="work-link" target="_blank">查看作品</a>
+                    <button class="preview-btn" data-preview="week10/flex1.html">預覽</button>
                 </div>
                 <div class="work-item">
                     <h3>作品 10-2</h3>
-                    <p>flex練習2</p>
+                    <div class="work-meta">
+                        <span class="work-date">完成日期：2024-04-23</span>
+                        <div class="work-tags">
+                            <span class="tag">CSS</span>
+                            <span class="tag">Flexbox</span>
+                            <span class="tag">Wrapping</span>
+                            <span class="tag">Spacing</span>
+                        </div>
+                    </div>
+                    <p>Flexbox換行與間距控制</p>
+                    <div class="work-description">
+                        <p>這是一個探索Flexbox進階佈局技術的作品，著重於項目排列流動與空間分配。主要特色包括：</p>
+                        <ul>
+                            <li><strong>換行控制</strong> - 運用flex-wrap屬性實現元素在空間不足時的換行行為</li>
+                            <li><strong>行間距調整</strong> - 通過align-content屬性設定多行元素之間的間距</li>
+                            <li><strong>元素間隙</strong> - 使用gap屬性(或margin)創建元素之間的統一間距</li>
+                            <li><strong>空間分配</strong> - 展示flex-grow與flex-shrink屬性控制元素的伸縮行為</li>
+                        </ul>
+                        <p>此作品展示了Flexbox在處理複雜排列需求時的強大能力，特別是在響應式佈局中的應用價值。</p>
+                    </div>
                     <a href="week10/flex2.html" class="work-link" target="_blank">查看作品</a>
+                    <button class="preview-btn" data-preview="week10/flex2.html">預覽</button>
                 </div>
                 <div class="work-item">
                     <h3>作品 10-3</h3>
-                    <p>flex練習3</p>
+                    <div class="work-meta">
+                        <span class="work-date">完成日期：2024-04-23</span>
+                        <div class="work-tags">
+                            <span class="tag">CSS</span>
+                            <span class="tag">Flexbox</span>
+                            <span class="tag">Responsive</span>
+                            <span class="tag">Patterns</span>
+                        </div>
+                    </div>
+                    <p>Flexbox響應式佈局模式</p>
+                    <div class="work-description">
+                        <p>這是一個展示Flexbox在響應式網頁設計中應用的綜合作品，呈現了多種實用的佈局模式。主要特色包括：</p>
+                        <ul>
+                            <li><strong>彈性轉換</strong> - 實現在不同屏幕尺寸下，從單欄到多欄的流暢轉換</li>
+                            <li><strong>等高列</strong> - 利用Flexbox自動等高特性創建視覺統一的多列佈局</li>
+                            <li><strong>順序調整</strong> - 應用order屬性在不同裝置下靈活調整元素顯示順序</li>
+                            <li><strong>聖杯佈局</strong> - 使用Flexbox實現經典的聖杯佈局(header-content-footer)結構</li>
+                        </ul>
+                        <p>此作品展示了Flexbox作為現代響應式佈局核心技術的實際應用，為創建適應各種螢幕尺寸的網頁提供了模式參考。</p>
+                    </div>
                     <a href="week10/flex3.html" class="work-link" target="_blank">查看作品</a>
+                    <button class="preview-btn" data-preview="week10/flex3.html">預覽</button>
                 </div>
                 <div class="work-item">
                     <h3>作品 10-4</h3>
-                    <p>flex練習4</p>
+                    <div class="work-meta">
+                        <span class="work-date">完成日期：2024-04-23</span>
+                        <div class="work-tags">
+                            <span class="tag">CSS</span>
+                            <span class="tag">Flexbox</span>
+                            <span class="tag">Cards</span>
+                            <span class="tag">UI Components</span>
+                        </div>
+                    </div>
+                    <p>Flexbox卡片式UI組件</p>
+                    <div class="work-description">
+                        <p>這是一個使用Flexbox創建現代卡片式界面組件的應用作品，展示了實際UI設計中的佈局技術。主要特色包括：</p>
+                        <ul>
+                            <li><strong>卡片佈局</strong> - 設計均衡、美觀的內容卡片，適用於展示產品或文章</li>
+                            <li><strong>內容對齊</strong> - 運用Flexbox實現卡片內容的垂直和水平對齊</li>
+                            <li><strong>自適應尺寸</strong> - 創建在不同容器寬度下均能優雅展示的彈性卡片</li>
+                            <li><strong>視覺層次</strong> - 通過間距和對齊建立清晰的信息層次，提升可讀性</li>
+                        </ul>
+                        <p>此作品將Flexbox技術應用於實際UI組件設計，展示了從理論到實踐的轉化過程，提供了可重用的界面元素模板。</p>
+                    </div>
                     <a href="week10/flex4.html" class="work-link" target="_blank">查看作品</a>
+                    <button class="preview-btn" data-preview="week10/flex4.html">預覽</button>
                 </div>
                 <div class="work-item">
                     <h3>作品 10-5</h3>
-                    <p>align-self</p>
+                    <div class="work-meta">
+                        <span class="work-date">完成日期：2024-04-23</span>
+                        <div class="work-tags">
+                            <span class="tag">CSS</span>
+                            <span class="tag">Flexbox</span>
+                            <span class="tag">Align-self</span>
+                            <span class="tag">Individual Control</span>
+                        </div>
+                    </div>
+                    <p>Flexbox個別元素對齊控制</p>
+                    <div class="work-description">
+                        <p>這是一個專注於Flexbox中個別元素對齊控制技術的深入探索作品，展示了精細的佈局調整能力。主要特色包括：</p>
+                        <ul>
+                            <li><strong>個別對齊</strong> - 通過align-self屬性控制單個項目在交叉軸上的對齊方式</li>
+                            <li><strong>對比展示</strong> - 並排對比不同align-self值產生的視覺效果差異</li>
+                            <li><strong>覆蓋父級</strong> - 展示align-self如何覆蓋容器的align-items設定</li>
+                            <li><strong>混合對齊</strong> - 創建具有視覺變化和層次感的混合對齊佈局</li>
+                        </ul>
+                        <p>此作品深入展示了Flexbox的元素級控制能力，為創建富有變化和視覺節奏的界面提供了技術基礎。</p>
+                    </div>
                     <a href="week10/alignself.html" class="work-link" target="_blank">查看作品</a>
+                    <button class="preview-btn" data-preview="week10/alignself.html">預覽</button>
                 </div>
                 <div class="work-item">
                     <h3>作品 10-6</h3>
-                    <p>花卉展示</p>
+                    <div class="work-meta">
+                        <span class="work-date">完成日期：2024-04-23</span>
+                        <div class="work-tags">
+                            <span class="tag">CSS</span>
+                            <span class="tag">Flexbox</span>
+                            <span class="tag">Gallery</span>
+                            <span class="tag">Showcase</span>
+                        </div>
+                    </div>
+                    <p>Flexbox花卉圖庫展示系統</p>
+                    <div class="work-description">
+                        <p>這是一個運用Flexbox技術打造的精美花卉主題圖庫展示作品，結合了美學設計與技術實現。主要特色包括：</p>
+                        <ul>
+                            <li><strong>網格式佈局</strong> - 創建整齊而富有韻律的圖庫排列</li>
+                            <li><strong>動態適應</strong> - 設計能夠適應不同螢幕尺寸的自動調整佈局</li>
+                            <li><strong>圖文結合</strong> - 優化圖片與描述文字的排版關係</li>
+                            <li><strong>視覺一致性</strong> - 維持圖片展示的一致性，同時保留各自特色</li>
+                        </ul>
+                        <p>此作品是對本週所學Flexbox技術的綜合應用，創建了既實用又美觀的內容展示系統，體現了網頁設計的藝術與技術結合。</p>
+                    </div>
                     <a href="week10/work.html" class="work-link" target="_blank">查看作品</a>
+                    <button class="preview-btn" data-preview="week10/work.html">預覽</button>
                 </div>
                 <h2>第十週週四作品(4月24日)</h2>
                 <div class="work-item">
                     <h3>作品 10-1</h3>
-                    <p>單張照片做九宮格</p>
+                    <div class="work-meta">
+                        <span class="work-date">完成日期：2024-04-24</span>
+                        <div class="work-tags">
+                            <span class="tag">CSS</span>
+                            <span class="tag">Grid</span>
+                            <span class="tag">Gallery</span>
+                            <span class="tag">Single Image</span>
+                        </div>
+                    </div>
+                    <p>單張照片九宮格分割技術</p>
+                    <div class="work-description">
+                        <p>這是一個使用CSS Grid技術將單張照片切分成九宮格視覺效果的創意作品，展示了網格佈局的精確控制能力。主要特色包括：</p>
+                        <ul>
+                            <li><strong>精確分割</strong> - 運用Grid設置3x3網格將原始圖片均勻切分</li>
+                            <li><strong>位置控制</strong> - 通過grid-area精確控制每個圖片分片的顯示位置</li>
+                            <li><strong>背景定位</strong> - 使用background-position技術在每個格子中顯示對應的圖片區域</li>
+                            <li><strong>視覺間隔</strong> - 通過gap屬性創建格子間的視覺間距，增強拼貼效果</li>
+                        </ul>
+                        <p>此作品展示了CSS Grid在圖像處理中的創意應用，為網頁設計提供了豐富的視覺表現方式。</p>
+                    </div>
                     <a href="week10 2.0/單張九宮格.html" class="work-link" target="_blank">查看作品</a>
-                </div>  
+                    <button class="preview-btn" data-preview="week10 2.0/單張九宮格.html">預覽</button>
+                </div>
                 <div class="work-item">
                     <h3>作品 10-2</h3>
-                    <p>多張照片做九宮格</p>
+                    <div class="work-meta">
+                        <span class="work-date">完成日期：2024-04-24</span>
+                        <div class="work-tags">
+                            <span class="tag">CSS</span>
+                            <span class="tag">Grid</span>
+                            <span class="tag">Multiple Images</span>
+                            <span class="tag">Layout</span>
+                        </div>
+                    </div>
+                    <p>多張照片九宮格陳列系統</p>
+                    <div class="work-description">
+                        <p>這是一個運用CSS Grid技術創建的照片九宮格陳列系統，展示了網格佈局處理多個獨立圖像的強大能力。主要特色包括：</p>
+                        <ul>
+                            <li><strong>統一結構</strong> - 創建一致的3x3網格結構，確保視覺統一性</li>
+                            <li><strong>圖片適配</strong> - 使用object-fit屬性確保不同比例的圖片在固定格子中完美顯示</li>
+                            <li><strong>響應式設計</strong> - 網格系統能夠適應不同螢幕寬度，保持九宮格的視覺效果</li>
+                            <li><strong>圖像間距</strong> - 應用適當的間距，提升整體視覺平衡和美感</li>
+                        </ul>
+                        <p>此作品展示了CSS Grid在圖片陳列中的實際應用價值，為照片展示、產品陳列等常見網頁需求提供了理想解決方案。</p>
+                    </div>
                     <a href="week10 2.0/多張九宮格.html" class="work-link" target="_blank">查看作品</a>
+                    <button class="preview-btn" data-preview="week10 2.0/多張九宮格.html">預覽</button>
                 </div>
             </div>
 
@@ -302,46 +1278,447 @@
                 <h2>第十一週周三作品(4月30日)</h2>
                 <div class="work-item">
                     <h3>作品 11-1</h3>
-                    <p>練習1</p>
+                    <div class="work-meta">
+                        <span class="work-date">完成日期：2024-04-30</span>
+                        <div class="work-tags">
+                            <span class="tag">CSS</span>
+                            <span class="tag">Font</span>
+                            <span class="tag">Typography</span>
+                            <span class="tag">Basics</span>
+                        </div>
+                    </div>
+                    <p>字體樣式基礎設計原理</p>
+                    <div class="work-description">
+                        <p>這是一個探索CSS字體樣式基礎原理的入門作品，展示了文字排版的核心概念與技術。主要特色包括：</p>
+                        <ul>
+                            <li><strong>字體大小控制</strong> - 展示font-size屬性對視覺層次的影響，包括絕對和相對單位</li>
+                            <li><strong>字體粗細變化</strong> - 通過font-weight屬性創建不同程度的文字強調</li>
+                            <li><strong>字體風格應用</strong> - 運用font-style設定斜體、正常等不同文字風格</li>
+                            <li><strong>行高調整技術</strong> - 使用line-height屬性優化文本區塊的可讀性</li>
+                        </ul>
+                        <p>此作品建立了文字排版的基礎認知，為創建專業、易讀的網頁內容提供了技術基礎。</p>
+                    </div>
                     <a href="week11/fontstyle1.html" class="work-link" target="_blank">查看作品</a>
+                    <button class="preview-btn" data-preview="week11/fontstyle1.html">預覽</button>
                 </div>
                 <div class="work-item">
                     <h3>作品 11-2</h3>
-                    <p>練習2</p>
+                    <div class="work-meta">
+                        <span class="work-date">完成日期：2024-04-30</span>
+                        <div class="work-tags">
+                            <span class="tag">CSS</span>
+                            <span class="tag">Font</span>
+                            <span class="tag">Advanced</span>
+                            <span class="tag">Text Decoration</span>
+                        </div>
+                    </div>
+                    <p>字體樣式進階技術與應用</p>
+                    <div class="work-description">
+                        <p>這是一個探索字體樣式進階技術的深入作品，展示了豐富的文字裝飾與排版效果。主要特色包括：</p>
+                        <ul>
+                            <li><strong>文字裝飾線</strong> - 使用text-decoration系列屬性創建下劃線、上劃線和刪除線效果</li>
+                            <li><strong>裝飾線樣式</strong> - 調整裝飾線的顏色、粗細和樣式，提升設計表現力</li>
+                            <li><strong>文字變換</strong> - 運用text-transform控制大小寫轉換，創建標題和強調效果</li>
+                            <li><strong>文字間距</strong> - 通過letter-spacing和word-spacing屬性優化字符和詞語間的視覺關係</li>
+                        </ul>
+                        <p>此作品展示了如何通過細節處理提升文字排版的專業品質，為網頁設計提供了豐富的表現手法。</p>
+                    </div>
                     <a href="week11/fontstyle2.html" class="work-link" target="_blank">查看作品</a>
+                    <button class="preview-btn" data-preview="week11/fontstyle2.html">預覽</button>
                 </div>
                 <div class="work-item">
                     <h3>作品 11-3</h3>
-                    <p>練習3</p>
+                    <div class="work-meta">
+                        <span class="work-date">完成日期：2024-04-30</span>
+                        <div class="work-tags">
+                            <span class="tag">CSS</span>
+                            <span class="tag">Text</span>
+                            <span class="tag">Emphasis</span>
+                            <span class="tag">Visual Markers</span>
+                        </div>
+                    </div>
+                    <p>文字視覺強調技術探索</p>
+                    <div class="work-description">
+                        <p>這是一個專注於CSS文字強調技術的專題研究，展示了不同的視覺標記方法。主要特色包括：</p>
+                        <ul>
+                            <li><strong>強調標記</strong> - 運用text-emphasis屬性添加視覺符號，增強文字重要性</li>
+                            <li><strong>標記樣式變化</strong> - 展示不同形狀的強調標記，如圓點、圓圈、三角形等</li>
+                            <li><strong>標記位置控制</strong> - 調整強調標記的位置，適應不同排版需求</li>
+                            <li><strong>標記顏色設定</strong> - 通過text-emphasis-color屬性創建與文字協調的視覺效果</li>
+                        </ul>
+                        <p>此作品深入展示了CSS文字強調技術，特別適用於需要突出重點內容的網頁設計中。</p>
+                    </div>
                     <a href="week11/text-emphasis,fontstyle3.html" class="work-link" target="_blank">查看作品</a>
+                    <button class="preview-btn" data-preview="week11/text-emphasis,fontstyle3.html">預覽</button>
                 </div>
                 <div class="work-item">
                     <h3>作品 11-4</h3>
-                    <p>練習4</p>
+                    <div class="work-meta">
+                        <span class="work-date">完成日期：2024-04-30</span>
+                        <div class="work-tags">
+                            <span class="tag">CSS</span>
+                            <span class="tag">Text</span>
+                            <span class="tag">Shadow</span>
+                            <span class="tag">Effects</span>
+                        </div>
+                    </div>
+                    <p>文字陰影效果與視覺深度</p>
+                    <div class="work-description">
+                        <p>這是一個探索CSS文字陰影技術的視覺設計作品，展示了如何通過陰影創建空間感和視覺層次。主要特色包括：</p>
+                        <ul>
+                            <li><strong>基礎陰影</strong> - 運用text-shadow屬性創建簡單的文字投影效果</li>
+                            <li><strong>多重陰影</strong> - 設計多層陰影，創建更豐富的視覺深度</li>
+                            <li><strong>發光效果</strong> - 使用模糊參數創建文字發光或霓虹燈效果</li>
+                            <li><strong>立體文字</strong> - 通過精確控制陰影位置和色彩，模擬3D立體文字效果</li>
+                        </ul>
+                        <p>此作品展示了文字陰影在網頁視覺設計中的豐富表現力，適用於標題、標識和特殊強調文字的設計。</p>
+                    </div>
                     <a href="week11/textshadow.html" class="work-link" target="_blank">查看作品</a>
+                    <button class="preview-btn" data-preview="week11/textshadow.html">預覽</button>
                 </div>
                 <div class="work-item">
                     <h3>作品 11-5</h3>
-                    <p>練習5</p>
+                    <div class="work-meta">
+                        <span class="work-date">完成日期：2024-04-30</span>
+                        <div class="work-tags">
+                            <span class="tag">CSS</span>
+                            <span class="tag">Font</span>
+                            <span class="tag">Transform</span>
+                            <span class="tag">Animation</span>
+                        </div>
+                    </div>
+                    <p>字體動態變換與互動效果</p>
+                    <div class="work-description">
+                        <p>這是一個展示字體視覺變換和動態效果的創意作品，探索了CSS字體操控的多種可能性。主要特色包括：</p>
+                        <ul>
+                            <li><strong>文字縮放</strong> - 使用transform: scale()實現文字大小的動態變化</li>
+                            <li><strong>旋轉效果</strong> - 通過transform: rotate()創建文字旋轉的視覺效果</li>
+                            <li><strong>透明度變化</strong> - 結合opacity屬性創建文字淡入淡出的視覺過渡</li>
+                            <li><strong>互動觸發</strong> - 使用:hover等狀態選擇器實現使用者互動時的文字變換</li>
+                        </ul>
+                        <p>此作品展示了CSS字體變換技術在提升網頁互動體驗方面的應用，為網頁設計增添動態視覺效果。</p>
+                    </div>
                     <a href="week11/font5.html" class="work-link" target="_blank">查看作品</a>
+                    <button class="preview-btn" data-preview="week11/font5.html">預覽</button>
                 </div>
                 <div class="work-item">
                     <h3>作品 11-6</h3>
-                    <p>練習6</p>
+                    <div class="work-meta">
+                        <span class="work-date">完成日期：2024-04-30</span>
+                        <div class="work-tags">
+                            <span class="tag">CSS</span>
+                            <span class="tag">Font</span>
+                            <span class="tag">Family</span>
+                            <span class="tag">Typography</span>
+                        </div>
+                    </div>
+                    <p>字體家族與排版系統設計</p>
+                    <div class="work-description">
+                        <p>這是一個探索CSS字體家族應用的深入作品，展示了如何建立一致且專業的排版系統。主要特色包括：</p>
+                        <ul>
+                            <li><strong>字體堆疊</strong> - 設定font-family屬性，創建可靠的字體後備機制</li>
+                            <li><strong>無襯線字體</strong> - 展示sans-serif字體系列在現代界面設計中的應用</li>
+                            <li><strong>襯線字體</strong> - 運用serif字體系列創建正式、傳統的文本風格</li>
+                            <li><strong>等寬字體</strong> - 使用monospace字體呈現代碼和技術內容</li>
+                        </ul>
+                        <p>此作品展示了專業字體選擇對網頁設計的重要影響，強調了建立一致排版系統的實際應用方法。</p>
+                    </div>
                     <a href="week11/font-family.html" class="work-link" target="_blank">查看作品</a>
+                    <button class="preview-btn" data-preview="week11/font-family.html">預覽</button>
                 </div>
                 <div class="work-item">
                     <h3>作品 11-7</h3>
-                    <p>作業</p>
+                    <div class="work-meta">
+                        <span class="work-date">完成日期：2024-04-30</span>
+                        <div class="work-tags">
+                            <span class="tag">CSS</span>
+                            <span class="tag">Typography</span>
+                            <span class="tag">Creative</span>
+                            <span class="tag">Expression</span>
+                        </div>
+                    </div>
+                    <p>創意文字排版與個人表達</p>
+                    <div class="work-description">
+                        <p>這是一個將本週所學技術融會貫通的創意表達作品，通過排版藝術展示「影響我最深的一句話」。主要特色包括：</p>
+                        <ul>
+                            <li><strong>情感視覺化</strong> - 運用字體樣式、大小和顏色表達文字背後的情感</li>
+                            <li><strong>層次建立</strong> - 透過不同視覺重量的文字元素創建閱讀層次和焦點</li>
+                            <li><strong>空間安排</strong> - 精心設計文字間距和排列，創造視覺節奏和平衡</li>
+                            <li><strong>統一美學</strong> - 建立協調的色彩和風格系統，提升整體設計凝聚力</li>
+                        </ul>
+                        <p>此作品是個人創意與技術應用的結合，展示了文字排版作為表達媒介的藝術潛力。</p>
+                    </div>
                     <a href="week11/作業.html" class="work-link" target="_blank">查看作品</a>
+                    <button class="preview-btn" data-preview="week11/作業.html">預覽</button>
                 </div>
-                
+                <h2>第十一週週四作品(5月1日)</h2>
+                <div class="work-item">
+                    <h3>作品 11-1</h3>
+                    <div class="work-meta">
+                        <span class="work-date">完成日期：2024-05-01</span>
+                        <div class="work-tags">
+                            <span class="tag">CSS</span>
+                            <span class="tag">Navigation</span>
+                            <span class="tag">Responsive</span>
+                            <span class="tag">Web Design</span>
+                        </div>
+                    </div>
+                    <p>多頁面網站設計與導覽系統</p>
+                    <div class="work-description">
+                        <p>這是一個完整的多頁面網站專題，展示了現代化網頁設計的關鍵元素。主要特色包括：</p>
+                        <ul>
+                            <li><strong>響應式導覽列</strong> - 運用CSS實現懸停效果、活動狀態標記及流暢的色彩過渡</li>
+                            <li><strong>文字特效展示</strong> - 「網頁設計」頁面中展示四種不同風格的文字效果，包含漸層色彩和背景圖片剪裁技術</li>
+                            <li><strong>文字描邊技術</strong> - 專題頁面示範了不同粗細和顏色的文字描邊效果，展示了-webkit-text-stroke屬性的應用</li>
+                            <li><strong>完整的網站結構</strong> - 包含首頁、功能頁和聯絡資訊等完整網站架構</li>
+                        </ul>
+                        <p>此專題綜合運用了CSS選擇器、背景處理、文字特效等多種技術，是響應式網頁設計的優秀示範。</p>
+                    </div>
+                    <a href="week 11 2.0/導覽列.html" class="work-link" target="_blank">查看作品</a>
+                    <button class="preview-btn" data-preview="week 11 2.0/導覽列.html">預覽</button>
+                </div>
+            </div>
 
-
+            <div class="work-content" id="week12">
+                <h2>第十二週周三作品(5月7日)</h2>
+                <div class="work-item">
+                    <h3>作品 12-1</h3>
+                    <div class="work-meta">
+                        <span class="work-date">完成日期：2024-05-07</span>
+                        <div class="work-tags">
+                            <span class="tag">CSS</span>
+                            <span class="tag">Pseudo-Elements</span>
+                            <span class="tag">Flower</span>
+                            <span class="tag">Creative Design</span>
+                        </div>
+                    </div>
+                    <p>CSS偽元素花卉創意設計</p>
+                    <div class="work-description">
+                        <p>這是一個運用CSS偽元素創建花卉視覺效果的創意作品，展示了純CSS視覺設計的無限可能。主要特色包括：</p>
+                        <ul>
+                            <li><strong>疊層效果</strong> - 通過多層偽元素疊加實現逼真的花朵立體感</li>
+                            <li><strong>顏色漸變</strong> - 應用漸變色彩創造花卉的自然色彩過渡</li>
+                            <li><strong>零圖片實現</strong> - 完全不依賴任何圖片資源，純粹通過CSS代碼實現視覺效果</li>
+                        </ul>
+                        <p>此作品展示了CSS偽元素在視覺藝術中的創意應用，證明純代碼也能創造出生動優雅的設計效果。</p>
+                    </div>
+                    <a href="week 12/flower.html" class="work-link" target="_blank">查看作品</a>
+                    <button class="preview-btn" data-preview="week 12/flower.html">預覽</button>
+                </div>
+                <div class="work-item">
+                    <h3>作品 12-2</h3>
+                    <div class="work-meta">
+                        <span class="work-date">完成日期：2024-05-07</span>
+                        <div class="work-tags">
+                            <span class="tag">CSS</span>
+                            <span class="tag">RWD</span>
+                            <span class="tag">Layout</span>
+                            <span class="tag">Media Queries</span>
+                        </div>
+                    </div>
+                    <p>RWD響應式基礎佈局設計</p>
+                    <div class="work-description">
+                        <p>這是一個探索CSS響應式網頁設計(RWD)基礎原理的實踐作品，展示了適應不同螢幕尺寸的頁面佈局技術。主要特色包括：</p>
+                        <ul>
+                            <li><strong>媒體查詢</strong> - 使用@media規則檢測裝置螢幕寬度，根據不同尺寸調整頁面佈局</li>
+                            <li><strong>流動佈局</strong> - 運用相對單位(如百分比、rem)創建能夠適應不同寬度的彈性佈局</li>
+                            <li><strong>區塊重排</strong> - 在小螢幕設備上將多欄佈局重新排列為單欄，提升移動裝置可用性</li>
+                            <li><strong>斷點設定</strong> - 在關鍵尺寸點設置佈局轉換，確保各種裝置都能獲得最佳體驗</li>
+                        </ul>
+                        <p>此作品展示了現代網頁必備的響應式設計基礎，為創建跨裝置兼容的網站奠定技術基礎。</p>
+                    </div>
+                    <a href="week 12/rwd-layout.html" class="work-link" target="_blank">查看作品</a>
+                    <button class="preview-btn" data-preview="week 12/rwd-layout.html">預覽</button>
+                </div>
+                <div class="work-item">
+                    <h3>作品 12-3</h3>
+                    <div class="work-meta">
+                        <span class="work-date">完成日期：2024-05-07</span>
+                        <div class="work-tags">
+                            <span class="tag">CSS</span>
+                            <span class="tag">Grid</span>
+                            <span class="tag">RWD</span>
+                            <span class="tag">Flex</span>
+                        </div>
+                    </div>
+                    <p>Flex與Grid響應式組合設計</p>
+                    <div class="work-description">
+                        <p>這是一個結合CSS Grid和Flexbox實現進階響應式佈局的綜合作品，展示了現代佈局技術的協同應用。主要特色包括：</p>
+                        <ul>
+                            <li><strong>Grid框架</strong> - 使用CSS Grid建立整體頁面結構，提供精確的二維佈局控制</li>
+                            <li><strong>Flex元素</strong> - 在Grid單元格內使用Flexbox優化元素對齊和空間分配</li>
+                            <li><strong>自適應區塊</strong> - 設計能根據可用空間自動調整大小和位置的內容區塊</li>
+                            <li><strong>漸進增強</strong> - 實現在大螢幕展現豐富佈局，小螢幕保持簡潔易用的漸進式體驗</li>
+                        </ul>
+                        <p>此作品展示了如何結合Grid和Flex的優勢創建複雜而靈活的響應式佈局，適用於現代網站開發。</p>
+                    </div>
+                    <a href="week 12/rwd-layout2.html" class="work-link" target="_blank">查看作品</a>
+                    <button class="preview-btn" data-preview="week 12/rwd-layout2.html">預覽</button>
+                </div>
+                <div class="work-item">
+                    <h3>作品 12-4</h3>
+                    <div class="work-meta">
+                        <span class="work-date">完成日期：2024-05-07</span>
+                        <div class="work-tags">
+                            <span class="tag">CSS</span>
+                            <span class="tag">RWD</span>
+                            <span class="tag">Images</span>
+                            <span class="tag">Viewport</span>
+                        </div>
+                    </div>
+                    <p>RWD響應式圖像與媒體控制</p>
+                    <div class="work-description">
+                        <p>這是一個專注於響應式圖像處理和媒體控制的技術探索作品，展示了多媒體元素的自適應技術。主要特色包括：</p>
+                        <ul>
+                            <li><strong>圖像自適應</strong> - 運用max-width:100%和object-fit屬性確保圖像可以流暢縮放而不變形</li>
+                            <li><strong>視口單位</strong> - 使用vw、vh等視口相對單位創建與螢幕尺寸成比例的元素</li>
+                            <li><strong>圖像畫廊</strong> - 設計可在不同裝置上優雅展示的圖像集合，自動調整每行顯示數量</li>
+                            <li><strong>背景適配</strong> - 實現背景圖像的智能縮放和位置調整，確保關鍵視覺元素始終可見</li>
+                        </ul>
+                        <p>此作品解決了響應式設計中圖像和多媒體內容的處理挑戰，提供了確保視覺一致性的技術方案。</p>
+                    </div>
+                    <a href="week 12/rwd-layout3.html" class="work-link" target="_blank">查看作品</a>
+                    <button class="preview-btn" data-preview="week 12/rwd-layout3.html">預覽</button>
+                </div>
+                <div class="work-item">
+                    <h3>作品 12-5</h3>
+                    <div class="work-meta">
+                        <span class="work-date">完成日期：2024-05-07</span>
+                        <div class="work-tags">
+                            <span class="tag">CSS</span>
+                            <span class="tag">Navigation</span>
+                            <span class="tag">RWD</span>
+                            <span class="tag">Mobile First</span>
+                        </div>
+                    </div>
+                    <p>響應式導航與移動優先設計</p>
+                    <div class="work-description">
+                        <p>這是一個實現響應式導航系統的專業作品，採用移動優先設計理念創建全面兼容的用戶界面。主要特色包括：</p>
+                        <ul>
+                            <li><strong>移動優先</strong> - 以小螢幕設計為基礎，逐步增強大螢幕體驗的設計思路</li>
+                            <li><strong>漢堡菜單</strong> - 在小螢幕裝置上實現折疊式導航菜單，節省空間同時保持功能性</li>
+                            <li><strong>轉換動畫</strong> - 使用CSS過渡和動畫效果實現平滑的導航狀態轉換</li>
+                            <li><strong>觸控優化</strong> - 優化點擊區域和交互反饋，提升行動裝置的操作體驗</li>
+                        </ul>
+                        <p>此作品展示了現代網站必備的響應式導航設計技術，解決了跨裝置用戶體驗的關鍵挑戰。</p>
+                    </div>
+                    <a href="week 12/rwd-layout4.html" class="work-link" target="_blank">查看作品</a>
+                    <button class="preview-btn" data-preview="week 12/rwd-layout4.html">預覽</button>
+                </div>
+                <div class="work-item">
+                    <h3>作品 12-6</h3>
+                    <div class="work-meta">
+                        <span class="work-date">完成日期：2024-05-07</span>
+                        <div class="work-tags">
+                            <span class="tag">CSS</span>
+                            <span class="tag">RWD</span>
+                            <span class="tag">Accessibility</span>
+                            <span class="tag">Best Practices</span>
+                        </div>
+                    </div>
+                    <p>響應式網頁綜合實踐與優化</p>
+                    <div class="work-description">
+                        <p>這是一個綜合應用本週所學響應式技術的集大成作品，展示了專業級RWD實踐與最佳化策略。主要特色包括：</p>
+                        <ul>
+                            <li><strong>多層響應</strong> - 設置多個斷點實現細緻的佈局適配，覆蓋從手機到大屏顯示器的全尺寸範圍</li>
+                            <li><strong>性能優化</strong> - 實施CSS最佳實踐，確保樣式表簡潔高效，加快頁面載入速度</li>
+                            <li><strong>無障礙設計</strong> - 遵循WCAG準則，確保內容在各種設備和輔助技術下均可使用</li>
+                            <li><strong>打印適配</strong> - 添加打印媒體查詢，優化內容的紙質輸出效果</li>
+                        </ul>
+                        <p>此作品是響應式網頁設計的全面展示，體現了專業網頁開發從設計到實現再到優化的完整流程。</p>
+                    </div>
+                    <a href="week 12/rwd-practice.html" class="work-link" target="_blank">查看作品</a>
+                    <button class="preview-btn" data-preview="week 12/rwd-practice.html">預覽</button>
+                </div>
+                <div class="work-item">
+                    <h3>作品 12-7</h3>
+                    <div class="work-meta">
+                        <span class="work-date">完成日期：2024-05-14</span>
+                        <div class="work-tags">
+                            <span class="tag">HTML5</span>
+                            <span class="tag">CSS</span>
+                            <span class="tag">RWD</span>
+                            <span class="tag">多媒體</span>
+                        </div>
+                    </div>
+                    <p>學生資料與多媒體響應式展示</p>
+                    <div class="work-description">
+                        <p>這個作品展示了一個創新的響應式網頁設計，完美結合學生資料展示與多媒體內容。特色包括：</p>
+                        <ul>
+                            <li><strong>智能布局</strong> - 根據設備尺寸自動調整網格布局，從桌面版的三列到手機版的單列流式布局</li>
+                            <li><strong>漢堡菜單</strong> - 在小螢幕設備上實現了直觀的漢堡菜單，提升用戶操作體驗</li>
+                            <li><strong>多媒體整合</strong> - 無縫整合圖片與視頻內容，並針對不同設備螢幕尺寸進行優化</li>
+                            <li><strong>交互反饋</strong> - 添加用戶友好的交互元素，如點擊效果與媒體控制</li>
+                        </ul>
+                        <p>此作品展示了如何在保持視覺吸引力的同時，確保跨設備的流暢使用體驗，適合作為學生照片與多媒體內容展示的模板。</p>
+                    </div>
+                    <a href="week 12/飛機.html" class="work-link" target="_blank">查看作品</a>
+                    <button class="preview-btn" data-preview="week 12/飛機.html">預覽</button>
+                </div>
+            </div>
         </div>
     </div>
     
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
+        // 頁面載入動畫
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                document.querySelector('.loading-overlay').style.display = 'none';
+            }, 1000);
+        });
+
+        // 作品預覽功能
+        document.querySelectorAll('.preview-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const previewUrl = this.getAttribute('data-preview');
+                const modal = document.createElement('div');
+                modal.className = 'preview-modal';
+                modal.innerHTML = `
+                    <div class="preview-content">
+                        <iframe src="${previewUrl}" loading="lazy"></iframe>
+                        <button class="close-preview">關閉預覽</button>
+                    </div>
+                `;
+                document.body.appendChild(modal);
+                modal.style.display = 'flex';
+                
+                // 點擊關閉按鈕關閉預覽
+                modal.querySelector('.close-preview').addEventListener('click', function() {
+                    modal.remove();
+                });
+                
+                // 點擊背景關閉預覽
+                modal.addEventListener('click', function(e) {
+                    if (e.target === modal) {
+                        modal.remove();
+                    }
+                });
+
+                // 按ESC鍵關閉預覽
+                document.addEventListener('keydown', function(e) {
+                    if (e.key === 'Escape') {
+                        modal.remove();
+                    }
+                });
+            });
+        });
+
+        // 響應式設計
+        function adjustLayout() {
+            const width = window.innerWidth;
+            if (width < 768) {
+                document.querySelector('.left-section').style.width = '100%';
+                document.querySelector('.right-section').style.width = '100%';
+            } else {
+                document.querySelector('.left-section').style.width = '250px';
+                document.querySelector('.right-section').style.width = 'calc(100% - 250px)';
+            }
+        }
+
+        window.addEventListener('resize', adjustLayout);
+        adjustLayout();
+
         // 切換作品顯示的腳本
         document.querySelectorAll('.menu-item').forEach(item => {
             item.addEventListener('click', function() {
