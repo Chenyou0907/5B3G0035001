@@ -311,17 +311,38 @@
                     // 更新预览容器的类
                     preview.className = 'device-preview ' + btn.dataset.device;
                     
-                    // 根据设备类型调整图片高度
+                    // 根据设备类型调整图片高度和菜单显示
                     const studentImages = document.querySelectorAll('.student-image');
-                    studentImages.forEach(img => {
+                    const hamburgerMenu = document.getElementById('hamburger-menu');
+                    const desktopMenu = document.querySelector('.desktop-menu');
+                    
+                    if (btn.dataset.device === 'mobile' || btn.dataset.device === 'tablet') {
+                        // 在手机和平板模式下显示汉堡菜单，隐藏桌面菜单
+                        hamburgerMenu.style.display = 'block';
+                        desktopMenu.style.display = 'none';
+                        
                         if (btn.dataset.device === 'mobile') {
-                            img.style.height = '200px';
-                        } else if (btn.dataset.device === 'tablet') {
-                            img.style.height = '250px';
+                            studentImages.forEach(img => {
+                                img.style.height = '200px';
+                            });
                         } else {
-                            img.style.height = '280px';
+                            studentImages.forEach(img => {
+                                img.style.height = '250px';
+                            });
                         }
-                    });
+                    } else {
+                        // 在桌面模式下隐藏汉堡菜单，显示桌面菜单
+                        hamburgerMenu.style.display = 'none';
+                        desktopMenu.style.display = 'block';
+                        
+                        studentImages.forEach(img => {
+                            img.style.height = '280px';
+                        });
+                    }
+                    
+                    // 重置移动菜单的状态
+                    const mobilMenu = document.getElementById('mobil-menu');
+                    mobilMenu.classList.remove('active');
                 });
             });
         });
