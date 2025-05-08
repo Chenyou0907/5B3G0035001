@@ -137,6 +137,145 @@
         .preview-btn {
             margin-left: 5px;
         }
+        
+        /* 音樂播放器彈窗樣式 */
+        .music-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: #3498db;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            z-index: 999;
+            font-size: 20px;
+            transition: all 0.3s ease;
+        }
+        .music-btn:hover {
+            transform: scale(1.1);
+            background: #2980b9;
+        }
+        .music-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            z-index: 1001;
+            justify-content: center;
+            align-items: center;
+        }
+        .music-content {
+            background: white;
+            border-radius: 10px;
+            width: 380px;
+            padding: 20px;
+            position: relative;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+        .music-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+        }
+        .music-header h3 {
+            margin: 0;
+            color: #333;
+        }
+        .close-music {
+            background: #ff4444;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .close-music:hover {
+            background: #ff6666;
+        }
+        .music-player {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        .spotify-container {
+            width: 100%;
+            height: 380px;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .playlist-selection {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        .playlist-selection select {
+            padding: 8px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            background: white;
+            color: #333;
+        }
+        .now-playing {
+            text-align: center;
+            font-style: italic;
+            color: #666;
+            margin-top: 10px;
+        }
+        /* 暗色主題音樂播放器樣式 */
+        .dark-theme .music-content {
+            background: #333;
+            color: #fff;
+        }
+        .dark-theme .music-header h3 {
+            color: #fff;
+        }
+        .dark-theme .music-header {
+            border-bottom-color: #555;
+        }
+        .dark-theme .now-playing {
+            color: #bbb;
+        }
+        .dark-theme .playlist-selection select {
+            background: #222;
+            color: #fff;
+            border-color: #555;
+        }
+        .dark-theme .spotify-info {
+            color: #bbb;
+        }
+        .spotify-info {
+            font-size: 12px;
+            color: #666;
+            text-align: center;
+            margin-top: 10px;
+        }
+        .spotify-info a {
+            color: #1DB954;
+            text-decoration: none;
+        }
+        .spotify-info a:hover {
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
@@ -1204,12 +1343,75 @@
         </div>
     </div>
     
+    <!-- 音樂播放器按鈕 -->
+    <div class="music-btn" id="musicBtn">♫</div>
+    
+    <!-- 音樂播放器彈窗 -->
+    <div class="music-modal" id="musicModal">
+        <div class="music-content">
+            <div class="music-header">
+                <h3>Spotify音樂播放器</h3>
+                <button class="close-music" id="closeMusic">✕</button>
+            </div>
+            <div class="music-player">
+                <div class="playlist-selection">
+                    <select id="spotifyPlaylistSelect">
+                        <option value="1K63ntfkfI5Wsnz9DdaYUW">陳祐的歌單</option>
+                        <option value="37i9dQZF1DX0XUsuxWHRQd">今日熱門歌曲</option>
+                        <option value="37i9dQZF1DX4sWSpwq3LiO">華語人氣榜</option>
+                        <option value="37i9dQZF1DWUVpAXiEPK8P">K-Pop熱門榜</option>
+                        <option value="37i9dQZF1DX6VdMW310YC7">古典音樂精選</option>
+                        <option value="37i9dQZF1DX4dyzvuaRJ0n">電影原聲帶</option>
+                        <option value="37i9dQZF1DX3Ogo9pFvBkY">心情放鬆</option>
+                        <option value="37i9dQZF1DXcBWIGoYBM5M">全球流行音樂</option>
+                    </select>
+                </div>
+                <div class="spotify-container" id="spotifyContainer">
+                    <iframe id="spotifyPlayer" style="border-radius:12px" src="https://open.spotify.com/embed/playlist/1K63ntfkfI5Wsnz9DdaYUW?utm_source=generator&autoplay=1&shuffle=1" width="100%" height="380" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+                </div>
+                <div class="spotify-info">
+                    需要<a href="https://www.spotify.com/" target="_blank">Spotify</a>帳號才能播放完整歌曲。無帳號可試聽30秒。
+                </div>
+            </div>
+        </div>
+    </div>
+    
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         // 頁面載入動畫
         window.addEventListener('load', function() {
             setTimeout(function() {
                 document.querySelector('.loading-overlay').style.display = 'none';
+                
+                // 網站載入後自動開啟音樂播放器並嘗試多種方式實現自動播放
+                setTimeout(function() {
+                    // 顯示音樂播放器
+                    const musicModal = document.getElementById('musicModal');
+                    musicModal.style.display = 'flex';
+                    
+                    // 更新播放器URL，確保包含自動播放和隨機播放參數
+                    const spotifyPlayer = document.getElementById('spotifyPlayer');
+                    const currentSrc = spotifyPlayer.src;
+                    if (!currentSrc.includes('autoplay=1')) {
+                        spotifyPlayer.src = currentSrc + (currentSrc.includes('?') ? '&' : '?') + 'autoplay=1&shuffle=1';
+                    } else {
+                        // 重新加載iframe觸發播放
+                        spotifyPlayer.src = spotifyPlayer.src;
+                    }
+                    
+                    // 嘗試直接點擊Spotify播放按鈕（注意：由於跨域限制，這可能不會成功）
+                    try {
+                        setTimeout(function() {
+                            const playerFrame = spotifyPlayer.contentWindow;
+                            if (playerFrame && playerFrame.document) {
+                                const playButton = playerFrame.document.querySelector('.control-button.play-button');
+                                if (playButton) playButton.click();
+                            }
+                        }, 2000);
+                    } catch (e) {
+                        console.log('自動點擊播放按鈕失敗，可能因為跨域限制', e);
+                    }
+                }, 1500);
             }, 1000);
         });
 
@@ -1326,6 +1528,43 @@
                     body.classList.add('dark-theme');
                     localStorage.setItem('theme', 'dark-theme');
                     themeToggle.textContent = '切換淺色';
+                }
+            });
+            
+            // 音樂播放器功能
+            const musicBtn = document.getElementById('musicBtn');
+            const musicModal = document.getElementById('musicModal');
+            const closeMusic = document.getElementById('closeMusic');
+            const spotifyPlaylistSelect = document.getElementById('spotifyPlaylistSelect');
+            const spotifyPlayer = document.getElementById('spotifyPlayer');
+            
+            // 顯示音樂播放器彈窗
+            musicBtn.addEventListener('click', function() {
+                musicModal.style.display = 'flex';
+            });
+            
+            // 關閉音樂播放器彈窗
+            closeMusic.addEventListener('click', function() {
+                musicModal.style.display = 'none';
+            });
+            
+            // 點擊背景關閉彈窗
+            musicModal.addEventListener('click', function(e) {
+                if (e.target === musicModal) {
+                    musicModal.style.display = 'none';
+                }
+            });
+            
+            // 選擇Spotify播放清單
+            spotifyPlaylistSelect.addEventListener('change', function() {
+                const playlistId = this.value;
+                spotifyPlayer.src = `https://open.spotify.com/embed/playlist/${playlistId}?utm_source=generator&autoplay=1&shuffle=1`;
+            });
+            
+            // 按ESC鍵關閉音樂彈窗
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && musicModal.style.display === 'flex') {
+                    musicModal.style.display = 'none';
                 }
             });
         });

@@ -130,6 +130,11 @@ p {
     background-color: #ffffff;
     border-radius: 5px;
     box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+}
+
+.work-item:hover {
+    transform: scale(1.05);
 }
 
 .work-content {
@@ -146,21 +151,83 @@ p {
     color: #333;
 }
 
-.work-link {
+/* 作品元數據樣式 */
+.work-meta {
+    margin: 10px 0;
+    font-size: 0.9em;
+    color: #666;
+}
+
+.work-date {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.work-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+.tag {
+    background: #e0e0e0;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 0.8em;
+}
+
+/* 作品描述樣式 */
+.work-description {
+    margin: 10px 0;
+    padding: 10px;
+    background: #f5f5f5;
+    border-radius: 5px;
+}
+
+/* 修改按鈕樣式 */
+.work-link, .preview-btn {
     display: inline-block;
-    margin-top: 10px;
-    padding: 8px 15px;
-    background-color: #4CAF50;
-    color: white;
+    padding: 8px 16px;
+    margin: 5px;
+    border-radius: 20px;
     text-decoration: none;
-    border-radius: 4px;
-    font-weight: 500;
-    transition: background-color 0.3s ease;
+    color: white;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+}
+
+.work-link {
+    background: #4CAF50;
+}
+
+.preview-btn {
+    background: #2196F3;
+    margin-left: 5px;
+}
+
+.work-link:hover, .preview-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
 }
 
 .work-link:hover {
-    background-color: #45a049;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    background: #45a049;
+}
+
+.preview-btn:hover {
+    background: #1976D2;
+}
+
+/* 動畫效果 */
+.work-content {
+    animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
 /* 深色主題樣式 */
@@ -281,6 +348,38 @@ body.dark-theme .work-link:hover {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
+/* 暗色主題按鈕樣式 */
+body.dark-theme .work-link {
+    background: #45a049;
+}
+
+body.dark-theme .preview-btn {
+    background: #1976D2;
+}
+
+body.dark-theme .work-link:hover {
+    background: #3d8b40;
+}
+
+body.dark-theme .preview-btn:hover {
+    background: #1565C0;
+}
+
+/* 暗色主題適配 */
+.dark-theme .work-description {
+    background: #333;
+    color: #fff;
+}
+
+.dark-theme .tag {
+    background: #555;
+    color: #fff;
+}
+
+.dark-theme .work-meta {
+    color: #aaa;
+}
+
 /* 滾動條深色主題 */
 body.dark-theme ::-webkit-scrollbar {
     width: 10px;
@@ -363,87 +462,250 @@ body.dark-theme .theme-toggle:active {
     }
 }
 
-/* 作品元數據樣式 */
-.work-meta {
-    margin: 10px 0;
-    font-size: 0.9em;
-    color: #666;
-}
-
-.work-date {
-    display: block;
-    margin-bottom: 5px;
-}
-
-.work-tags {
+/* 頁面載入動畫 */
+.loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #fff;
     display: flex;
-    flex-wrap: wrap;
-    gap: 5px;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
 }
 
-.tag {
-    background: #e0e0e0;
-    padding: 2px 8px;
-    border-radius: 12px;
-    font-size: 0.8em;
+.loading-spinner {
+    width: 50px;
+    height: 50px;
+    border: 5px solid #f3f3f3;
+    border-top: 5px solid #3498db;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
 }
 
-/* 作品描述樣式 */
-.work-description {
-    margin: 10px 0;
-    padding: 10px;
-    background: #f5f5f5;
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* 預覽模態框 */
+.preview-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.85);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+}
+
+.preview-content {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    width: 90%;
+    height: 90vh;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.preview-content iframe {
+    width: 100%;
+    height: calc(100% - 40px);
+    border: none;
     border-radius: 5px;
 }
 
-/* 預覽按鈕樣式 */
-.preview-btn {
-    background: #4CAF50;
-    color: white;
-    border: none;
-    padding: 8px 16px;
-    border-radius: 4px;
-    cursor: pointer;
-    margin-top: 10px;
-    transition: background 0.3s ease;
-}
-
-.preview-btn:hover {
-    background: #45a049;
-}
-
-/* 關閉預覽按鈕樣式 */
 .close-preview {
-    background: #f44336;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: #ff4444;
     color: white;
     border: none;
-    padding: 8px 16px;
-    border-radius: 4px;
+    padding: 8px 15px;
+    border-radius: 20px;
     cursor: pointer;
+    font-size: 16px;
+    transition: all 0.3s ease;
+}
+
+.close-preview:hover {
+    background: #ff6666;
+    transform: scale(1.05);
+}
+
+.dark-theme .preview-content {
+    background: #333;
+}
+
+.dark-theme .preview-content iframe {
+    background: white;
+}
+
+/* 音樂播放器彈窗樣式 */
+.music-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: #3498db;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    z-index: 999;
+    font-size: 20px;
+    transition: all 0.3s ease;
+}
+
+.music-btn:hover {
+    transform: scale(1.1);
+    background: #2980b9;
+}
+
+.music-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.7);
+    z-index: 1001;
+    justify-content: center;
+    align-items: center;
+}
+
+.music-content {
+    background: white;
+    border-radius: 10px;
+    width: 380px;
+    padding: 20px;
+    position: relative;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+.music-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+}
+
+.music-header h3 {
+    margin: 0;
+    color: #333;
+}
+
+.close-music {
+    background: #ff4444;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.close-music:hover {
+    background: #ff6666;
+}
+
+.music-player {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.spotify-container {
+    width: 100%;
+    height: 380px;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.playlist-selection {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
     margin-top: 10px;
 }
 
-/* 動畫效果 */
-.work-content {
-    animation: fadeIn 0.5s ease;
+.playlist-selection select {
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    background: white;
+    color: #333;
 }
 
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
+.now-playing {
+    text-align: center;
+    font-style: italic;
+    color: #666;
+    margin-top: 10px;
 }
 
-/* 暗色主題適配 */
-.dark-theme .work-description {
+/* 暗色主題音樂播放器樣式 */
+.dark-theme .music-content {
     background: #333;
     color: #fff;
 }
 
-.dark-theme .tag {
-    background: #555;
+.dark-theme .music-header h3 {
     color: #fff;
 }
 
-.dark-theme .work-meta {
-    color: #aaa;
+.dark-theme .music-header {
+    border-bottom-color: #555;
+}
+
+.dark-theme .now-playing {
+    color: #bbb;
+}
+
+.dark-theme .playlist-selection select {
+    background: #222;
+    color: #fff;
+    border-color: #555;
+}
+
+.dark-theme .spotify-info {
+    color: #bbb;
+}
+
+.spotify-info {
+    font-size: 12px;
+    color: #666;
+    text-align: center;
+    margin-top: 10px;
+}
+
+.spotify-info a {
+    color: #1DB954;
+    text-decoration: none;
+}
+
+.spotify-info a:hover {
+    text-decoration: underline;
 }
