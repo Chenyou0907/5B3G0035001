@@ -345,3 +345,105 @@ body.dark-theme .theme-toggle:hover {
 body.dark-theme .theme-toggle:active {
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
 }
+
+/* 響應式設計 */
+@media (max-width: 768px) {
+    .left-section, .right-section {
+        width: 100% !important;
+        float: none;
+    }
+    
+    .profile-section {
+        text-align: center;
+    }
+    
+    .work-item {
+        width: 100%;
+        margin: 10px 0;
+    }
+}
+
+/* 作品元數據樣式 */
+.work-meta {
+    margin: 10px 0;
+    font-size: 0.9em;
+    color: #666;
+}
+
+.work-date {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.work-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+.tag {
+    background: #e0e0e0;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 0.8em;
+}
+
+/* 作品描述樣式 */
+.work-description {
+    margin: 10px 0;
+    padding: 10px;
+    background: #f5f5f5;
+    border-radius: 5px;
+}
+
+/* 預覽按鈕樣式 */
+.preview-btn {
+    background: #4CAF50;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background 0.3s ease;
+}
+
+.preview-btn:hover {
+    background: #45a049;
+}
+
+/* 關閉預覽按鈕樣式 */
+.close-preview {
+    background: #f44336;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+/* 動畫效果 */
+.work-content {
+    animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* 暗色主題適配 */
+.dark-theme .work-description {
+    background: #333;
+    color: #fff;
+}
+
+.dark-theme .tag {
+    background: #555;
+    color: #fff;
+}
+
+.dark-theme .work-meta {
+    color: #aaa;
+}
