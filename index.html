@@ -8,275 +8,6 @@
     <link rel="stylesheet" href="styles3.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <link rel="icon" href="頭貼.png" type="image/x-icon">
-    <style>
-        .loading-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: #fff;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-        }
-        .loading-spinner {
-            width: 50px;
-            height: 50px;
-            border: 5px solid #f3f3f3;
-            border-top: 5px solid #3498db;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        .preview-modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.85);
-            z-index: 1000;
-            justify-content: center;
-            align-items: center;
-        }
-        .preview-content {
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            width: 90%;
-            height: 90vh;
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-        .preview-content iframe {
-            width: 100%;
-            height: calc(100% - 40px);
-            border: none;
-            border-radius: 5px;
-        }
-        .close-preview {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background: #ff4444;
-            color: white;
-            border: none;
-            padding: 8px 15px;
-            border-radius: 20px;
-            cursor: pointer;
-            font-size: 16px;
-            transition: all 0.3s ease;
-        }
-        .close-preview:hover {
-            background: #ff6666;
-            transform: scale(1.05);
-        }
-        .dark-theme .preview-content {
-            background: #333;
-        }
-        .dark-theme .preview-content iframe {
-            background: white;
-        }
-        .work-item {
-            transition: transform 0.3s ease;
-        }
-        .work-item:hover {
-            transform: scale(1.05);
-        }
-        /* 修改按鈕樣式 */
-        .work-link, .preview-btn {
-            display: inline-block;
-            padding: 8px 16px;
-            margin: 5px;
-            border-radius: 20px;
-            text-decoration: none;
-            color: white;
-            font-size: 14px;
-            transition: all 0.3s ease;
-            border: none;
-            cursor: pointer;
-        }
-        .work-link {
-            background: #4CAF50;
-        }
-        .preview-btn {
-            background: #2196F3;
-        }
-        .work-link:hover, .preview-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-        }
-        .work-link:hover {
-            background: #45a049;
-        }
-        .preview-btn:hover {
-            background: #1976D2;
-        }
-        /* 暗色主題適配 */
-        .dark-theme .work-link {
-            background: #45a049;
-        }
-        .dark-theme .preview-btn {
-            background: #1976D2;
-        }
-        .dark-theme .work-link:hover {
-            background: #3d8b40;
-        }
-        .dark-theme .preview-btn:hover {
-            background: #1565C0;
-        }
-        /* 移除舊的預覽按鈕樣式 */
-        .preview-btn {
-            margin-left: 5px;
-        }
-        
-        /* 音樂播放器彈窗樣式 */
-        .music-btn {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background: #3498db;
-            color: white;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-            z-index: 999;
-            font-size: 20px;
-            transition: all 0.3s ease;
-        }
-        .music-btn:hover {
-            transform: scale(1.1);
-            background: #2980b9;
-        }
-        .music-modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.7);
-            z-index: 1001;
-            justify-content: center;
-            align-items: center;
-        }
-        .music-content {
-            background: white;
-            border-radius: 10px;
-            width: 380px;
-            padding: 20px;
-            position: relative;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-        }
-        .music-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 15px;
-            border-bottom: 1px solid #eee;
-            padding-bottom: 10px;
-        }
-        .music-header h3 {
-            margin: 0;
-            color: #333;
-        }
-        .close-music {
-            background: #ff4444;
-            color: white;
-            border: none;
-            padding: 5px 10px;
-            border-radius: 50%;
-            cursor: pointer;
-            font-size: 14px;
-            transition: all 0.3s ease;
-            width: 30px;
-            height: 30px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        .close-music:hover {
-            background: #ff6666;
-        }
-        .music-player {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-        .spotify-container {
-            width: 100%;
-            height: 380px;
-            border-radius: 8px;
-            overflow: hidden;
-        }
-        .playlist-selection {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            margin-top: 10px;
-        }
-        .playlist-selection select {
-            padding: 8px;
-            border-radius: 5px;
-            border: 1px solid #ddd;
-            background: white;
-            color: #333;
-        }
-        .now-playing {
-            text-align: center;
-            font-style: italic;
-            color: #666;
-            margin-top: 10px;
-        }
-        /* 暗色主題音樂播放器樣式 */
-        .dark-theme .music-content {
-            background: #333;
-            color: #fff;
-        }
-        .dark-theme .music-header h3 {
-            color: #fff;
-        }
-        .dark-theme .music-header {
-            border-bottom-color: #555;
-        }
-        .dark-theme .now-playing {
-            color: #bbb;
-        }
-        .dark-theme .playlist-selection select {
-            background: #222;
-            color: #fff;
-            border-color: #555;
-        }
-        .dark-theme .spotify-info {
-            color: #bbb;
-        }
-        .spotify-info {
-            font-size: 12px;
-            color: #666;
-            text-align: center;
-            margin-top: 10px;
-        }
-        .spotify-info a {
-            color: #1DB954;
-            text-decoration: none;
-        }
-        .spotify-info a:hover {
-            text-decoration: underline;
-        }
-    </style>
 </head>
 <body>
     <!-- 主題切換按鈕 -->
@@ -1338,6 +1069,61 @@
                     </div>
                     <a href="week 12/飛機.html" class="work-link" target="_blank">查看作品</a>
                     <button class="preview-btn" data-preview="week 12/飛機.html">預覽</button>
+                </div>
+            </div>
+
+            <div class="work-content" id="week13">
+                <h2>第十三週周三作品(5月14日)</h2>
+                <div class="work-item">
+                    <h3>作品 13-1</h3>
+                    <div class="work-meta">
+                        <span class="work-date">完成日期：2024-05-14</span>
+                        <div class="work-tags">
+                            <span class="tag">JavaScript</span>
+                            <span class="tag">基礎語法</span>
+                            <span class="tag">變數</span>
+                            <span class="tag">運算子</span>
+                        </div>
+                    </div>
+                    <div class="work-description">
+                        <p>JavaScript基礎語法入門練習，學習變數定義與基本運算。</p>
+                    </div>
+                    <a href="week 13/oper1.html" class="work-link" target="_blank">查看作品</a>
+                    <button class="preview-btn" data-preview="week 13/oper1.html">預覽</button>
+                </div>
+                <div class="work-item">
+                    <h3>作品 13-2</h3>
+                    <div class="work-meta">
+                        <span class="work-date">完成日期：2024-05-14</span>
+                        <div class="work-tags">
+                            <span class="tag">JavaScript</span>
+                            <span class="tag">條件語句</span>
+                            <span class="tag">if-else</span>
+                            <span class="tag">邏輯判斷</span>
+                        </div>
+                    </div>
+                    <div class="work-description">
+                        <p>條件語句與邏輯運算練習，學習程式流程控制基本概念。</p>
+                    </div>
+                    <a href="week 13/If1.html" class="work-link" target="_blank">查看作品</a>
+                    <button class="preview-btn" data-preview="week 13/If1.html">預覽</button>
+                </div>
+                <div class="work-item">
+                    <h3>作品 13-3</h3>
+                    <div class="work-meta">
+                        <span class="work-date">完成日期：2024-05-14</span>
+                        <div class="work-tags">
+                            <span class="tag">JavaScript</span>
+                            <span class="tag">成績轉換</span>
+                            <span class="tag">條件分支</span>
+                            <span class="tag">用戶輸入</span>
+                        </div>
+                    </div>
+                    <div class="work-description">
+                        <p>成績等第轉換應用，運用多層條件判斷處理用戶輸入數據。</p>
+                    </div>
+                    <a href="week 13/work1.html" class="work-link" target="_blank">查看作品</a>
+                    <button class="preview-btn" data-preview="week 13/work1.html">預覽</button>
                 </div>
             </div>
         </div>
