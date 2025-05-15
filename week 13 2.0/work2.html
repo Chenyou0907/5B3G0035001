@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>攝氏溫度轉華氏溫度</title>
+    <style>
+        body {
+            font-family: 'Microsoft YaHei', 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            width: 100%;
+            max-width: 500px;
+            transition: all 0.3s ease;
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 25px;
+            font-size: 1.8rem;
+        }
+        p {
+            color: #7f8c8d;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .input-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #2c3e50;
+            font-weight: bold;
+        }
+        input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border 0.3s;
+            box-sizing: border-box;
+        }
+        input:focus {
+            border-color: #3498db;
+            outline: none;
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: all 0.3s;
+            margin-top: 10px;
+        }
+        button:hover {
+            background: linear-gradient(135deg, #2980b9, #3498db);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        #result {
+            margin-top: 25px;
+            padding: 15px;
+            border-radius: 8px;
+            font-weight: bold;
+            text-align: center;
+            font-size: 18px;
+            color: #2c3e50;
+            background-color: #f8f9fa;
+            display: none;
+        }
+        #result.show {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @media (max-width: 480px) {
+            .container {
+                padding: 20px;
+            }
+            h1 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>攝氏溫度轉華氏溫度計算器</h1>
+        <p>請輸入攝氏溫度，計算對應的華氏溫度。</p>
+        
+        <div class="input-group">
+            <label for="celsius">攝氏溫度 (°C):</label> 
+            <input type="number" id="celsius" placeholder="請輸入攝氏溫度">
+        </div>
+        
+        <button onclick="convertToFahrenheit()">轉換溫度</button>
+        
+        <div id="result"></div>
+    </div>
+
+    <script>
+        // 函數：將攝氏溫度轉換為華氏溫度
+        function celsiusToFahrenheit(celsius) {
+            return (celsius * 9/5) + 32;
+        }
+        
+        // 在按鈕點擊時執行的函數
+        function convertToFahrenheit() {
+            // 獲取用戶輸入的攝氏溫度
+            const celsiusInput = document.getElementById('celsius').value;
+            const resultElement = document.getElementById('result');
+            
+            // 檢查輸入是否為空或不是數字
+            if (celsiusInput === '' || isNaN(celsiusInput)) {
+                resultElement.innerHTML = '請輸入有效的攝氏溫度';
+                resultElement.style.color = '#e74c3c';
+                resultElement.style.backgroundColor = '#fadbd8';
+            } else {
+                // 轉換為數字並進行計算
+                const celsius = parseFloat(celsiusInput);
+                const fahrenheit = celsiusToFahrenheit(celsius);
+                
+                // 顯示結果，保留兩位小數
+                resultElement.innerHTML = `${celsius} °C = ${fahrenheit.toFixed(2)} °F`;
+                resultElement.style.color = '#2c3e50';
+                resultElement.style.backgroundColor = '#e8f4fc';
+            }
+            
+            // 顯示結果區域並添加動畫效果
+            resultElement.classList.add('show');
+        }
+        
+        // 讓按Enter鍵也能觸發轉換
+        document.getElementById('celsius').addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') {
+                convertToFahrenheit();
+            }
+        });
+    </script>
+</body>
+</html>
