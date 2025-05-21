@@ -6,22 +6,32 @@
     <title>飲料清單</title>
 </head>
 <body>
-    <h1>飲料清單</h1>
     <script>
+        document.write('<h2>飲料橫排清單</h2>');
         let drinks = ['紅茶','綠茶','青茶','烏龍茶','奶茶','可樂','雪碧','檸檬紅茶'];
         document.write('<table border="1">');
-        // 第一列：飲料1、飲料2...
+
         document.write('<tr>');
         for(let i = 0; i < drinks.length; i++) {
             document.write('<td>飲料' + (i + 1) + '</td>');
         }
         document.write('</tr>');
-        // 第二列：飲料名稱
+        
         document.write('<tr>');
         for(let i = 0; i < drinks.length; i++) {
             document.write('<td>' + drinks[i] + '</td>');
         }
         document.write('</tr>');
+        document.write('</table>');
+        
+        document.write('<h2>飲料直排清單</h2>');
+        document.write('<table border="1">');
+        for(let i = 0; i < drinks.length; i++) {
+            document.write('<tr>');
+            document.write('<td>飲料' + (i + 1) + '</td>');
+            document.write('<td>' + drinks[i] + '</td>');
+            document.write('</tr>');
+        }
         document.write('</table>');
     </script>
 </body>
