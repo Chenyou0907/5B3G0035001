@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>array02 練習</title>
+</head>
+<body>
+    <script>
+        let grades = [70, 50, 84];
+        grades.push(35);
+        grades.push(100);
+        document.write("各分數：<br>");
+        for (let i = 0; i < grades.length; i++) {
+            document.write(grades[i] + "<br>");
+        }
+        // 計算總和
+        let sum = 0;
+        for (let i = 0; i < grades.length; i++) {
+            sum += grades[i];
+        }
+        // 計算平均
+        let avg = sum / grades.length;
+        document.write("<br>總和：" + sum + "<br>");
+        document.write("平均數：" + avg.toFixed(2) + "<br>");
+    </script>
+</body>
+</html>
