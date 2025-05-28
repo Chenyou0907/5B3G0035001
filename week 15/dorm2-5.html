@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>自我介紹</title>
+    <style>
+        button {
+            font-size: 20px;
+            padding: 10px 20px;
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>自我介紹</h1>
+    <div id="content"></div>
+    <button onclick="me();">關於我</button>
+    <button onclick="School();">學經歷</button>
+    <script>
+        function me() {
+
+            let elem = document.querySelector("#content");
+            elem.innerHTML = "你好，我是陳正祐";
+                    elem.style.fontSize = "30px";
+                    elem.style.color = "blue";
+        }
+
+        function School() {
+
+            let elem = document.querySelector("#content");
+            elem.innerHTML = "學歷：<br>學校：南臺科技大學<br>科系：資訊工程系<br><br>經歷：麥當勞現役服務生<br>";
+            elem.style.fontSize = "20px";
+            elem.style.color = "green";
+        }
+    </script>
+</body>
+</html> 
