@@ -66,7 +66,6 @@
                 return;
             }
             
-            // 更新 URL 參數
             const url = new URL(window.location.href);
             url.searchParams.set('dessert', selectedDessert.value);
             window.history.pushState({}, '', url);
