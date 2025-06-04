@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>購物車練習</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .product {
+            margin: 20px 0;
+        }
+        .product img {
+            width: 200px;
+            height: auto;
+        }
+        .cart-controls {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+        }
+        button {
+            padding: 5px 10px;
+            margin: 5px;
+            cursor: pointer;
+        }
+        .price {
+            font-size: 18px;
+            margin: 10px 0;
+        }
+        #totalAmount {
+            position: fixed;
+            top: 60px;
+            right: 20px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        #cartItems {
+            position: fixed;
+            top: 100px;
+            right: 20px;
+            width: 200px;
+            background: #f9f9f9;
+            padding: 10px;
+            border: 1px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+    <!-- 購物車控制按鈕 -->
+    <div class="cart-controls">
+        <button onclick="showTotal()">購物車總額</button>
+        <button onclick="clearCart()">清空購物車</button>
+    </div>
+
+    <!-- 顯示總金額 -->
+    <div id="totalAmount">總金額: $<span id="total">0</span></div>
+
+    <!-- 顯示購物車內容 -->
+    <div id="cartItems">
+        <h3>購物車內容：</h3>
+        <div id="itemsList"></div>
+    </div>
+
+    <!-- 商品區域 -->
+    <div class="product">
+        <img src="辛拉麵.jpg" alt="辛拉麵">
+        <p class="price">$49</p>
+        <button onclick="addToCart('辛拉麵', 49)">加入購物車</button>
+    </div>
+
+    <div class="product">
+        <img src="滿漢.jpg" alt="滿漢大餐">
+        <p class="price">$80</p>
+        <button onclick="addToCart('滿漢大餐', 80)">加入購物車</button>
+    </div>
+
+    <div class="product">
+        <img src="大乾麵.jpg" alt="大乾麵">
+        <p class="price">$35</p>
+        <button onclick="addToCart('大乾麵', 35)">加入購物車</button>
+    </div>
+
+    <script>
+        let cartItems = [];
+        let total = 0;
+
+        // 頁面載入時讀取儲存的購物車資料
+        window.onload = function() {
+            loadCart();
+        }
+
+        // 從 localStorage 讀取購物車資料
+        function loadCart() {
+            const savedCart = localStorage.getItem('cartItems');
+            const savedTotal = localStorage.getItem('cartTotal');
+            
+            if (savedCart) {
+                cartItems = JSON.parse(savedCart);
+                total = parseInt(savedTotal || '0');
+                updateCartDisplay();
+                updateTotalDisplay();
+            }
+        }
+
+        // 儲存購物車資料到 localStorage
+        function saveCart() {
+            localStorage.setItem('cartItems', JSON.stringify(cartItems));
+            localStorage.setItem('cartTotal', total.toString());
+        }
+        
+        function updateTotalDisplay() {
+            document.getElementById('total').textContent = total;
+        }
+
+        function updateCartDisplay() {
+            const itemsList = document.getElementById('itemsList');
+            itemsList.innerHTML = cartItems.map(item => 
+                `<div>${item.name} - $${item.price}</div>`
+            ).join('');
+        }
+
+        function addToCart(name, price) {
+            cartItems.push({ name, price });
+            total += price;
+            updateTotalDisplay();
+            updateCartDisplay();
+            saveCart();
+            alert('商品已加入購物車！');
+        }
+
+        function showTotal() {
+            alert('購物車總額：$' + total);
+        }
+
+        function clearCart() {
+            cartItems = [];
+            total = 0;
+            updateTotalDisplay();
+            updateCartDisplay();
+            saveCart();
+            alert('購物車已清空！');
+        }
+    </script>
+</body>
+</html>
