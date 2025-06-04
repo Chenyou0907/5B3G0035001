@@ -49,22 +49,22 @@
     </style>
 </head>
 <body>
-    <!-- 購物車控制按鈕 -->
+
     <div class="cart-controls">
         <button onclick="showTotal()">購物車總額</button>
         <button onclick="clearCart()">清空購物車</button>
     </div>
 
-    <!-- 顯示總金額 -->
+
     <div id="totalAmount">總金額: $<span id="total">0</span></div>
 
-    <!-- 顯示購物車內容 -->
+
     <div id="cartItems">
         <h3>購物車內容：</h3>
         <div id="itemsList"></div>
     </div>
 
-    <!-- 商品區域 -->
+
     <div class="product">
         <img src="辛拉麵.jpg" alt="辛拉麵">
         <p class="price">$49</p>
@@ -87,12 +87,10 @@
         let cartItems = [];
         let total = 0;
 
-        // 頁面載入時讀取儲存的購物車資料
         window.onload = function() {
             loadCart();
         }
 
-        // 從 localStorage 讀取購物車資料
         function loadCart() {
             const savedCart = localStorage.getItem('cartItems');
             const savedTotal = localStorage.getItem('cartTotal');
@@ -105,7 +103,6 @@
             }
         }
 
-        // 儲存購物車資料到 localStorage
         function saveCart() {
             localStorage.setItem('cartItems', JSON.stringify(cartItems));
             localStorage.setItem('cartTotal', total.toString());
@@ -128,11 +125,16 @@
             updateTotalDisplay();
             updateCartDisplay();
             saveCart();
-            alert('商品已加入購物車！');
+            console.log(`已添加商品：${name}，價格：$${price}`);
+            console.log(`當前購物車總額：$${total}`);
         }
 
         function showTotal() {
-            alert('購物車總額：$' + total);
+            console.log(`購物車總額：$${total}`);
+            console.log('購物車內容：');
+            cartItems.forEach(item => {
+                console.log(`- ${item.name}: $${item.price}`);
+            });
         }
 
         function clearCart() {
@@ -141,7 +143,7 @@
             updateTotalDisplay();
             updateCartDisplay();
             saveCart();
-            alert('購物車已清空！');
+            console.log('購物車已清空');
         }
     </script>
 </body>
